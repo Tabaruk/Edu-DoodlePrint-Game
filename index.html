@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edu-DoodlePrint Creator</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Fredoka & Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons Playful -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brandCream: '#FAF6EE',
+                        brandCoral: '#FF6B6B',
+                        brandSky: '#38BDF8',
+                        brandNavy: '#1E293B'
+                    },
+                    fontFamily: {
+                        fredoka: ['Fredoka', 'sans-serif'],
+                        sans: ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { 
+            background-color: #FAF6EE; 
+            font-family: 'Inter', sans-serif; 
+        }
+        .font-fredoka { 
+            font-family: 'Fredoka', cursive, sans-serif; 
+        }
+        /* Style Tombol Option / Chip */
+        .chip { 
+            transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1); 
+            cursor: pointer; 
+        }
+        .chip:hover { 
+            transform: translateY(-2px); 
+        }
+        .chip.active { 
+            background-color: #38BDF8; 
+            color: #ffffff; 
+            border-color: #0284C7; 
+            box-shadow: 0 4px 12px rgba(56, 189, 248, 0.35); 
+        }
+        .card-option { 
+            transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1); 
+            cursor: pointer; 
+        }
+        .card-option:hover { 
+            transform: translateY(-2px); 
+        }
+        .card-option.active { 
+            border-color: #FF6B6B; 
+            background-color: #FFF0F0; 
+            font-weight: 700; 
+            color: #E11D48; 
+            box-shadow: 0 4px 12px rgba(255, 107, 107, 0.25); 
+        }
+    </style>
+</head>
+<body class="text-slate-800 min-h-screen pb-28">
+
+    <!-- Toast Notification Peringatan Maksimal 3 Game -->
+    <div id="toastMsg" class="fixed top-5 right-5 z-50 bg-amber-500 text-white px-5 py-3 rounded-2xl shadow-xl font-bold text-sm flex items-center gap-2 transform transition-all duration-300 translate-y-[-100px] opacity-0">
+        <i class="fa-solid fa-triangle-exclamation text-lg"></i>
+        <span id="toastText">Maksimal memilih 3 jenis game!</span>
+    </div>
+
+    <!-- Header Branding Edu-DoodlePrint -->
+    <header class="bg-white border-b-4 border-sky-200 py-6 px-4 shadow-sm mb-6">
+        <div class="max-w-4xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
+            
+            <!-- Logo & Brand Name -->
+            <div class="flex flex-col sm:flex-row items-center gap-4">
+                <!-- Logo Presisi Sesuai Gambar -->
+                <div class="relative w-24 h-24 flex-shrink-0">
+                    <img src="1000537884.jpg" alt="Edu-DoodlePrint Logo" class="w-full h-full object-contain drop-shadow-md" onerror="this.style.display='none'; document.getElementById('fallbackLogo').style.display='block';">
+                    
+                    <!-- Fallback SVG jika file gambar belum di-host lokal -->
+                    <div id="fallbackLogo" style="display:none;" class="w-24 h-24">
+                        <svg viewBox="0 0 200 200" fill="none" class="w-full h-full">
+                            <rect x="30" y="70" width="140" height="85" rx="32" fill="#7DD3FC" stroke="#0F172A" stroke-width="8"/>
+                            <circle cx="70" cy="106" r="8" fill="#0F172A"/>
+                            <circle cx="130" cy="106" r="8" fill="#0F172A"/>
+                            <path d="M90 112 Q100 123 110 112" stroke="#0F172A" stroke-width="7" stroke-linecap="round" fill="none"/>
+                        </svg>
+                    </div>
+                </div>
+
+                <div>
+                    <!-- Nama Brand Edu-DoodlePrint dengan warna khas -->
+                    <h1 class="text-3xl md:text-4xl font-fredoka font-bold tracking-tight">
+                        <span class="text-[#FF6B6B]">Edu-Doodle</span><span class="text-[#38BDF8]">Print</span>
+                    </h1>
+                    <p class="text-slate-600 font-fredoka text-sm md:text-base font-semibold mt-1">
+                        Cetak Imajinasi Jadi Realisasi!
+                    </p>
+                </div>
+            </div>
+
+            <div class="max-w-xs text-xs text-slate-500 bg-sky-50 p-3.5 rounded-2xl border border-sky-100 font-medium">
+                🚀 Rangkai game interaktif, cetak prompt AI instan untuk ChatGPT, Google AI Studio, Gemini, Claude, Lovable, atau Canva!
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigasi Langkah Cepat (Point 1 - 5) -->
+    <nav class="sticky top-2 z-30 max-w-4xl mx-auto px-4 mb-6">
+        <div class="bg-white/95 backdrop-blur-md p-2 rounded-2xl shadow-md border border-slate-200 flex items-center justify-between text-xs overflow-x-auto gap-1">
+            <a href="#point-1" class="px-3 py-2 rounded-xl font-bold text-slate-700 hover:bg-sky-100 hover:text-sky-700 transition flex items-center gap-1.5 whitespace-nowrap">
+                🎮 1. Jenis Game
+            </a>
+            <a href="#point-2" class="px-3 py-2 rounded-xl font-bold text-slate-700 hover:bg-sky-100 hover:text-sky-700 transition flex items-center gap-1.5 whitespace-nowrap">
+                📚 2. Materi Pembelajaran
+            </a>
+            <a href="#point-3" class="px-3 py-2 rounded-xl font-bold text-slate-700 hover:bg-sky-100 hover:text-sky-700 transition flex items-center gap-1.5 whitespace-nowrap">
+                🎓 3. Jumlah Soal & Siswa
+            </a>
+            <a href="#point-4" class="px-3 py-2 rounded-xl font-bold text-slate-700 hover:bg-sky-100 hover:text-sky-700 transition flex items-center gap-1.5 whitespace-nowrap">
+                🎨 4. Tema & Visual Background
+            </a>
+            <a href="#point-5" class="px-3 py-2 rounded-xl font-bold text-slate-700 hover:bg-sky-100 hover:text-sky-700 transition flex items-center gap-1.5 whitespace-nowrap">
+                🚀 5. Target AI
+            </a>
+        </div>
+    </nav>
+
+    <!-- Container Utama -->
+    <main class="max-w-4xl mx-auto px-4 space-y-6">
+
+        <!-- POINT 1: Jenis Game (Maksimal 3) & Bahasa -->
+        <section id="point-1" class="bg-white p-6 rounded-3xl shadow-sm border-2 border-slate-100">
+            <div class="flex items-center justify-between mb-4">
+                <h2 class="text-lg font-fredoka font-bold text-slate-900 flex items-center gap-2">
+                    <span class="w-8 h-8 bg-sky-100 text-sky-600 rounded-xl flex items-center justify-center text-sm font-bold">1</span>
+                    Jenis Game & Bahasa
+                </h2>
+                <span class="text-xs bg-rose-100 text-rose-600 font-bold px-3 py-1 rounded-full">
+                    Maksimal Pilih 3 Game
+                </span>
+            </div>
+
+            <!-- Opsi Jenis Game -->
+            <div class="mb-5">
+                <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">
+                    Pilih Mekanik Game (Bisa pilih lebih dari 1, maksimal 3)
+                </label>
+                <div class="flex flex-wrap gap-2" id="gameTypeContainer">
+                    <!-- Ditampilkan via JS -->
+                </div>
+            </div>
+
+            <!-- Opsi Bahasa -->
+            <div>
+                <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">
+                    Bahasa Pengantar Permainan
+                </label>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-3" id="languageContainer">
+                    <div class="card-option active p-3 rounded-2xl border-2 border-slate-200 text-center text-sm font-bold flex items-center justify-center gap-2" data-lang="Bahasa Indonesia">
+                        <span>🇮🇩</span> Bahasa Indonesia
+                    </div>
+                    <div class="card-option p-3 rounded-2xl border-2 border-slate-200 text-center text-sm font-bold flex items-center justify-center gap-2" data-lang="English">
+                        <span>🇬🇧</span> English
+                    </div>
+                    <div class="card-option p-3 rounded-2xl border-2 border-slate-200 text-center text-sm font-bold flex items-center justify-center gap-2" data-lang="Bilingual (ID & EN)">
+                        <span>🌐</span> Bilingual (ID & EN)
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- POINT 2: Materi & Tema Pembelajaran -->
+        <section id="point-2" class="bg-white p-6 rounded-3xl shadow-sm border-2 border-slate-100">
+            <h2 class="text-lg font-fredoka font-bold text-slate-900 flex items-center gap-2 mb-4">
+                <span class="w-8 h-8 bg-sky-100 text-sky-600 rounded-xl flex items-center justify-center text-sm font-bold">2</span>
+                Materi & Tema Pembelajaran
+            </h2>
+
+            <div class="mb-4">
+                <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">
+                    Pilih Topik Populer
+                </label>
+                <div class="flex flex-wrap gap-2" id="topicContainer">
+                    <!-- Ditampilkan via JS -->
+                </div>
+            </div>
+
+            <div>
+                <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1" for="customTopic">
+                    Atau Ketik Materi / Tema Spesifik Anda
+                </label>
+                <input type="text" id="customTopic" placeholder="Contoh: Tata Surya, Majas & Gaya Bahasa, Operasi Hitung Perkalian" class="w-full px-4 py-3 text-sm rounded-2xl border-2 border-slate-200 focus:outline-none focus:border-sky-500 transition">
+            </div>
+        </section>
+
+        <!-- POINT 3: Jumlah Soal (Bebas Input User) & Target Siswa -->
+        <section id="point-3" class="bg-white p-6 rounded-3xl shadow-sm border-2 border-slate-100">
+            <h2 class="text-lg font-fredoka font-bold text-slate-900 flex items-center gap-2 mb-4">
+                <span class="w-8 h-8 bg-sky-100 text-sky-600 rounded-xl flex items-center justify-center text-sm font-bold">3</span>
+                Jumlah Soal & Target Peserta Didik
+            </h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-5">
+                <!-- Jumlah Soal Ditentukan Bebas Oleh User -->
+                <div>
+                    <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1" for="questionCountInput">
+                        Jumlah Soal (Bebas Ditentukan)
+                    </label>
+                    <input type="text" id="questionCountInput" value="10 Soal" placeholder="Contoh: 12 Soal, 15 Pertanyaan, 20 Kartu" class="w-full px-3 py-3 text-sm rounded-2xl border-2 border-sky-300 focus:outline-none focus:border-sky-500 font-bold text-sky-600 bg-sky-50/50">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1" for="educationLevel">Jenjang</label>
+                    <select id="educationLevel" class="w-full px-3 py-3 text-sm rounded-2xl border-2 border-slate-200 focus:outline-none focus:border-sky-500 bg-white font-medium">
+                        <option value="PAUD/TK">PAUD / TK</option>
+                        <option value="SD (Sekolah Dasar)" selected>SD (Sekolah Dasar)</option>
+                        <option value="SMP (Sekolah Menengah Pertama)">SMP (Sekolah Menengah Pertama)</option>
+                        <option value="SMA/SMK">SMA / SMK / Sederajat</option>
+                        <option value="Umum / Mahasiswa">Umum / Mahasiswa</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1" for="classLevel">Kelas / Tingkat</label>
+                    <input type="text" id="classLevel" value="Kelas 4 - 5" class="w-full px-3 py-3 text-sm rounded-2xl border-2 border-slate-200 focus:outline-none focus:border-sky-500 font-medium">
+                </div>
+            </div>
+
+            <div>
+                <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">
+                    Tujuan Pembelajaran
+                </label>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-2" id="bloomContainer">
+                    <!-- Ditampilkan via JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- POINT 4: Tema Background Game & Gaya Visual -->
+        <section id="point-4" class="bg-white p-6 rounded-3xl shadow-sm border-2 border-slate-100">
+            <h2 class="text-lg font-fredoka font-bold text-slate-900 flex items-center gap-2 mb-4">
+                <span class="w-8 h-8 bg-sky-100 text-sky-600 rounded-xl flex items-center justify-center text-sm font-bold">4</span>
+                Tema Background Game & Visual Interaktif
+            </h2>
+
+            <!-- TAMBAHAN BARU: Menu Tema Background Game -->
+            <div class="mb-5">
+                <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">
+                    Pilih Tema Latar Belakang / Background Game
+                </label>
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-3 mb-3" id="bgThemeContainer">
+                    <!-- Ditampilkan via JS -->
+                </div>
+                <input type="text" id="customBgTheme" placeholder="Ketik tema background kustom (Misal: Pemandangan Sawah, Kota Futuristik)" class="w-full px-4 py-2.5 text-xs rounded-2xl border-2 border-slate-200 focus:outline-none focus:border-sky-500">
+            </div>
+
+            <div class="mb-5">
+                <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">
+                    Gaya Visual UI Game
+                </label>
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-3" id="visualStyleContainer">
+                    <!-- Ditampilkan via JS -->
+                </div>
+            </div>
+
+            <div>
+                <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">
+                    Fitur & Elemen Permainan
+                </label>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-2" id="featureContainer">
+                    <!-- Ditampilkan via JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- POINT 5: Target AI (Termasuk ChatGPT) & Branding -->
+        <section id="point-5" class="bg-white p-6 rounded-3xl shadow-sm border-2 border-slate-100">
+            <h2 class="text-lg font-fredoka font-bold text-slate-900 flex items-center gap-2 mb-4">
+                <span class="w-8 h-8 bg-sky-100 text-sky-600 rounded-xl flex items-center justify-center text-sm font-bold">5</span>
+                Target AI Builder & Branding Creator
+            </h2>
+
+            <div class="mb-4">
+                <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">
+                    Target AI Builder (Termasuk ChatGPT)
+                </label>
+                <div class="flex flex-wrap gap-2" id="aiTargetContainer">
+                    <!-- Ditampilkan via JS -->
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1" for="creatorBrand">
+                        Nama Brand / Creator
+                    </label>
+                    <input type="text" id="creatorBrand" value="Edu-DoodlePrint" class="w-full px-4 py-2.5 text-sm rounded-2xl border-2 border-slate-200 focus:outline-none focus:border-sky-500 font-bold">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1" for="extraInstructions">
+                        Instruksi Khusus / Catatan Tambahan
+                    </label>
+                    <input type="text" id="extraInstructions" placeholder="Contoh: Efek suara ceria saat jawaban benar" class="w-full px-4 py-2.5 text-sm rounded-2xl border-2 border-slate-200 focus:outline-none focus:border-sky-500">
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Floating Action Bar Bottom -->
+    <div class="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-md border-t-2 border-slate-200 py-3.5 px-4 z-40 shadow-2xl">
+        <div class="max-w-4xl mx-auto flex items-center justify-between gap-4">
+            <div class="text-xs font-bold text-slate-600 hidden sm:block">
+                <span class="bg-sky-100 text-sky-700 px-2.5 py-1 rounded-full font-bold" id="selectedCount">0</span> Opsi Terpilih
+            </div>
+            <button id="generateBtn" class="w-full sm:w-auto ml-auto bg-[#FF6B6B] hover:bg-rose-600 text-white font-fredoka font-bold text-base py-3 px-8 rounded-2xl shadow-lg shadow-rose-500/30 transition-all flex items-center justify-center gap-2 transform active:scale-95">
+                <i class="fa-solid fa-bolt text-amber-300"></i> Generate Prompt AI Instan
+            </button>
+        </div>
+    </div>
+
+    <!-- Modal Hasil Prompt AI -->
+    <div id="promptModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-white w-full max-w-2xl rounded-3xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
+            <div class="bg-slate-900 text-white p-4 px-6 flex items-center justify-between">
+                <h3 class="font-fredoka font-bold text-base flex items-center gap-2 text-sky-400">
+                    <i class="fa-solid fa-terminal"></i> Prompt Spesifikasi Edu-DoodlePrint
+                </h3>
+                <button id="closeModalBtn" class="text-slate-400 hover:text-white text-2xl font-bold">&times;</button>
+            </div>
+            <div class="p-6 overflow-y-auto bg-slate-900 text-sky-300 font-mono text-xs leading-relaxed">
+                <pre id="promptResult" class="whitespace-pre-wrap break-words"></pre>
+            </div>
+            <div class="bg-slate-100 p-4 px-6 flex flex-wrap items-center justify-end gap-3 border-t border-slate-200">
+                <button id="downloadBtn" class="px-4 py-2.5 bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold rounded-2xl text-xs transition flex items-center gap-2">
+                    <i class="fa-solid fa-download"></i> Unduh .txt
+                </button>
+                <button id="copyBtn" class="px-5 py-2.5 bg-[#38BDF8] hover:bg-sky-500 text-white font-bold rounded-2xl text-xs shadow transition flex items-center gap-2">
+                    <i class="fa-solid fa-copy"></i> Salin ke Clipboard
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script Logika Aplikasi -->
+    <script>
+        // Data Mekanik Game
+        const gameTypes = [
+            { name: "Drag & Drop", icon: "fa-solid fa-hand-pointer" },
+            { name: "Matching / Jodohkan", icon: "fa-solid fa-puzzle-piece" },
+            { name: "Balloon Pop", icon: "fa-solid fa-circle-dot" },
+            { name: "Catch Game", icon: "fa-solid fa-hand" },
+            { name: "Shooting Target", icon: "fa-solid fa-bullseye" },
+            { name: "Fishing Game", icon: "fa-solid fa-fish" },
+            { name: "Kuis Pilihan Ganda", icon: "fa-solid fa-list-check" },
+            { name: "Benar / Salah", icon: "fa-solid fa-circle-check" },
+            { name: "Isikan Huruf", icon: "fa-solid fa-keyboard" },
+            { name: "Word Search", icon: "fa-solid fa-magnifying-glass" },
+            { name: "Teka-Teki Silang", icon: "fa-solid fa-border-all" },
+            { name: "Word Scramble", icon: "fa-solid fa-shuffle" },
+            { name: "Revealed Picture Grid", icon: "fa-solid fa-table-cells" },
+            { name: "Memory Flip Card", icon: "fa-solid fa-clone" },
+            { name: "Puzzle Interaktif", icon: "fa-solid fa-shapes" },
+            { name: "Escape Room Edukasi", icon: "fa-solid fa-key" },
+            { name: "Tebak Gambar", icon: "fa-solid fa-image" },
+            { name: "Roda Putar Soal", icon: "fa-solid fa-dharmachakra" }
+        ];
+
+        // Data Tema Background Game (Fitur Baru)
+        const bgThemes = [
+            { name: "Pemandangan Alam", icon: "fa-solid fa-mountain-sun" },
+            { name: "Luar Angkasa / Space", icon: "fa-solid fa-rocket" },
+            { name: "Bawah Laut / Ocean", icon: "fa-solid fa-water" },
+            { name: "Hutan Ajaib / Fantasy", icon: "fa-solid fa-tree" },
+            { name: "Kastil / Kerajaan", icon: "fa-solid fa-chess-rook" },
+            { name: "Papan Tulis Sekolah", icon: "fa-solid fa-chalkboard-user" }
+        ];
+
+        const popularTopics = [
+            { name: "Ekosistem & Rantai Makanan", icon: "fa-solid fa-leaf" },
+            { name: "Tata Surya & Planet", icon: "fa-solid fa-earth-americas" },
+            { name: "Anatomi Tubuh & Indra", icon: "fa-solid fa-child" },
+            { name: "Siklus Air & Hujan", icon: "fa-solid fa-cloud-showers-heavy" },
+            { name: "Garuda Pancasila & PPKn", icon: "fa-solid fa-flag" },
+            { name: "Majas & Gaya Bahasa", icon: "fa-solid fa-book-open" },
+            { name: "Sinonim & Antonim Kata", icon: "fa-solid fa-language" },
+            { name: "Eksperimen Biologi", icon: "fa-solid fa-flask" },
+            { name: "Operasi Matematika", icon: "fa-solid fa-calculator" }
+        ];
+
+        const bloomLevels = [
+            { name: "Mengingat", icon: "fa-solid fa-brain" },
+            { name: "Memahami", icon: "fa-solid fa-lightbulb" },
+            { name: "Menerapkan", icon: "fa-solid fa-gears" },
+            { name: "Menganalisis", icon: "fa-solid fa-chart-pie" },
+            { name: "Memecahkan Masalah", icon: "fa-solid fa-puzzle-piece" },
+            { name: "Literasi", icon: "fa-solid fa-comments" },
+            { name: "Numerasi", icon: "fa-solid fa-calculator" }
+        ];
+
+        const visualStyles = [
+            { name: "3D Felt Toys Pastel", icon: "fa-solid fa-cubes" },
+            { name: "Cute Cartoon Ceria", icon: "fa-solid fa-face-smile" },
+            { name: "Flat Illustration Minimalis", icon: "fa-solid fa-vector-square" },
+            { name: "Nature & Flora Kids", icon: "fa-solid fa-tree" },
+            { name: "Space Adventure Galaxy", icon: "fa-solid fa-rocket" },
+            { name: "Pixel Retro Arcade", icon: "fa-solid fa-gamepad" }
+        ];
+
+        const gameFeatures = [
+            { name: "Progressbar / Level", icon: "fa-solid fa-bars-progress" },
+            { name: "Timer opsional", icon: "fa-solid fa-stopwatch" },
+            { name: "Suara & efek audio", icon: "fa-solid fa-volume-high" },
+            { name: "Animasi feedback", icon: "fa-solid fa-wand-magic-sparkles" },
+            { name: "Hint / Petunjuk bantuan", icon: "fa-solid fa-lightbulb" },
+            { name: "Sistem bintang / Skor", icon: "fa-solid fa-star" },
+            { name: "Pembahasan jawaban", icon: "fa-solid fa-graduation-cap" }
+        ];
+
+        // Target AI Termasuk ChatGPT
+        const aiTargets = [
+            { name: "ChatGPT", icon: "fa-solid fa-comments" },
+            { name: "Google AI Studio", icon: "fa-solid fa-robot" },
+            { name: "Gemini", icon: "fa-solid fa-sparkles" },
+            { name: "Lovable", icon: "fa-solid fa-heart" },
+            { name: "Claude", icon: "fa-solid fa-brain" },
+            { name: "Canva", icon: "fa-solid fa-palette" }
+        ];
+
+        // State Penyimpanan Pilihan
+        let selectedGameTypes = ["Drag & Drop"]; // Maksimal 3
+        let selectedLanguage = "Bahasa Indonesia";
+        let selectedTopics = ["Ekosistem & Rantai Makanan"];
+        let selectedBgTheme = "Pemandangan Alam";
+        let selectedBloom = ["Memahami", "Menerapkan"];
+        let selectedStyle = "3D Felt Toys Pastel";
+        let selectedFeatures = ["Progressbar / Level", "Suara & efek audio", "Sistem bintang / Skor"];
+        let selectedAITargets = ["ChatGPT"];
+
+        // Toast Helper
+        function showToast(message) {
+            const toast = document.getElementById("toastMsg");
+            const toastText = document.getElementById("toastText");
+            if (toast && toastText) {
+                toastText.textContent = message;
+                toast.classList.remove("translate-y-[-100px]", "opacity-0");
+                toast.classList.add("translate-y-0", "opacity-100");
+                setTimeout(() => {
+                    toast.classList.remove("translate-y-0", "opacity-100");
+                    toast.classList.add("translate-y-[-100px]", "opacity-0");
+                }, 2500);
+            }
+        }
+
+        // Render Opsi Chip
+        function renderChips(containerId, items, selectedArray, isMulti = true, maxLimit = 99) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
+            container.innerHTML = "";
+            
+            items.forEach((itemObj) => {
+                const name = typeof itemObj === "string" ? itemObj : itemObj.name;
+                const icon = typeof itemObj === "object" && itemObj.icon ? itemObj.icon : null;
+
+                const chip = document.createElement("div");
+                const isSelected = selectedArray.includes(name);
+                chip.className = `chip px-3 py-2 rounded-2xl border-2 text-xs font-bold flex items-center gap-2 ${
+                    isSelected ? 'active' : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100'
+                }`;
+                
+                if (icon) {
+                    const iconElem = document.createElement("i");
+                    iconElem.className = `${icon} ${isSelected ? 'text-white' : 'text-sky-500'}`;
+                    chip.appendChild(iconElem);
+                }
+
+                const textElem = document.createElement("span");
+                textElem.textContent = name;
+                chip.appendChild(textElem);
+
+                chip.onclick = () => {
+                    if (isMulti) {
+                        if (selectedArray.includes(name)) {
+                            if (selectedArray.length > 1) {
+                                const index = selectedArray.indexOf(name);
+                                selectedArray.splice(index, 1);
+                            } else {
+                                showToast("Pilih minimal 1 jenis game!");
+                            }
+                        } else {
+                            if (selectedArray.length >= maxLimit) {
+                                showToast(`Maksimal hanya boleh memilih ${maxLimit} jenis game!`);
+                                return;
+                            }
+                            selectedArray.push(name);
+                        }
+                    } else {
+                        selectedArray.length = 0;
+                        selectedArray.push(name);
+                    }
+                    renderAll();
+                };
+                container.appendChild(chip);
+            });
+        }
+
+        // Render Opsi Card
+        function renderCards(containerId, items, selectedValue, onSelect) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
+            container.innerHTML = "";
+            items.forEach((itemObj) => {
+                const name = typeof itemObj === "string" ? itemObj : itemObj.name;
+                const icon = typeof itemObj === "object" && itemObj.icon ? itemObj.icon : null;
+
+                const isSelected = name === selectedValue;
+                const card = document.createElement("div");
+                card.className = `card-option p-3 rounded-2xl border-2 text-center text-xs font-bold flex items-center justify-center gap-2 ${
+                    isSelected ? 'active' : 'border-slate-200 bg-white text-slate-700 hover:bg-slate-50'
+                }`;
+
+                if (icon) {
+                    const iconElem = document.createElement("i");
+                    iconElem.className = `${icon} ${isSelected ? 'text-rose-600' : 'text-sky-500'}`;
+                    card.appendChild(iconElem);
+                }
+
+                const textElem = document.createElement("span");
+                textElem.textContent = name;
+                card.appendChild(textElem);
+
+                card.onclick = () => onSelect(name);
+                container.appendChild(card);
+            });
+        }
+
+        // Render Ulang Seluruh UI
+        function renderAll() {
+            renderChips("gameTypeContainer", gameTypes, selectedGameTypes, true, 3);
+            renderChips("topicContainer", popularTopics, selectedTopics, false);
+            renderChips("bloomContainer", bloomLevels, selectedBloom, true);
+            renderChips("featureContainer", gameFeatures, selectedFeatures, true);
+            renderChips("aiTargetContainer", aiTargets, selectedAITargets, false);
+
+            renderCards("bgThemeContainer", bgThemes, selectedBgTheme, (val) => {
+                selectedBgTheme = val;
+                renderAll();
+            });
+
+            renderCards("visualStyleContainer", visualStyles, selectedStyle, (val) => {
+                selectedStyle = val;
+                renderAll();
+            });
+
+            document.querySelectorAll("#languageContainer .card-option").forEach((card) => {
+                const lang = card.getAttribute("data-lang");
+                if (lang === selectedLanguage) {
+                    card.classList.add("active");
+                } else {
+                    card.classList.remove("active");
+                }
+            });
+
+            const countElem = document.getElementById("selectedCount");
+            if (countElem) {
+                countElem.textContent = String(selectedGameTypes.length + selectedBloom.length + selectedFeatures.length);
+            }
+        }
+
+        // Event Listener Bahasa
+        document.querySelectorAll("#languageContainer .card-option").forEach((card) => {
+            card.addEventListener("click", () => {
+                const lang = card.getAttribute("data-lang");
+                if (lang) {
+                    selectedLanguage = lang;
+                    renderAll();
+                }
+            });
+        });
+
+        // Generator Prompt AI Edu-DoodlePrint
+        function buildPrompt() {
+            const customTopicInput = document.getElementById("customTopic");
+            const topicValue = customTopicInput ? customTopicInput.value.trim() : "";
+            const finalTopic = topicValue ? topicValue : selectedTopics.join(", ");
+
+            const customBgInput = document.getElementById("customBgTheme");
+            const bgValue = customBgInput ? customBgInput.value.trim() : "";
+            const finalBgTheme = bgValue ? bgValue : selectedBgTheme;
+            
+            const levelElem = document.getElementById("educationLevel");
+            const classElem = document.getElementById("classLevel");
+            const qCountElem = document.getElementById("questionCountInput");
+            const brandElem = document.getElementById("creatorBrand");
+            const extraElem = document.getElementById("extraInstructions");
+
+            const level = levelElem ? levelElem.value : "SD (Sekolah Dasar)";
+            const classLvl = classElem ? classElem.value : "Kelas 4 - 5";
+            const qCount = (qCountElem && qCountElem.value.trim()) ? qCountElem.value.trim() : "10 Soal";
+            const brand = (brandElem && brandElem.value.trim()) ? brandElem.value.trim() : "Edu-DoodlePrint";
+            const extraNote = (extraElem && extraElem.value.trim()) ? extraElem.value.trim() : "Tampilan ramah anak, responsif, dan interaktif.";
+
+            return `PROMPT SPESIFIKASI GAME & KUIS EDUKASI INTERAKTIF (Edu-DoodlePrint)
+
+Target AI Builder: ${selectedAITargets.join(", ")}
+Brand / Creator: ${brand} (Logo Maskot Printer Edu-DoodlePrint)
+Bahasa Pengantar: ${selectedLanguage}
+
+1. SPESIFIKASI UTAMA PERMAINAN
+- Jenis Game: ${selectedGameTypes.join(", ")} (Maksimal 3 jenis)
+- Topik / Materi: ${finalTopic}
+- Sasaran Siswa: ${level} (${classLvl})
+- Jumlah Soal / Tantangan: ${qCount}
+
+2. TEMA BACKGROUND & VISUAL INTERAKTIF
+- Tema Background Game: ${finalBgTheme} (Wajib Dibuat Animatif / Interaktif)
+- Gaya Visual UI: ${selectedStyle}
+- Branding Header: Menampilkan Logo Maskot Printer Edu-DoodlePrint dengan nuansa warna khas yang sama secara konsisten.
+
+3. TUJUAN PEMBELAJARAN & MEKANIK PERMAINAN
+- Tujuan Pembelajaran: ${selectedBloom.join(", ")}
+- Fitur Interaktif: ${selectedFeatures.join(", ")}
+- Catatan Tambahan: ${extraNote}
+
+4. SYARAT WAJIB GAMEPLAY & KUALITAS REPLAYABILITY:
+- BACKGROUND DINAMIS & INTERAKTIF: Latar belakang game wajib dibuat hidup dan interaktif sesuai tema "${finalBgTheme}" (contoh: pemandangan dengan awan bergerak, luar angkasa dengan bintang berkedip, atau efek elemen interaktif lainnya).
+- TOMBOL "MAIN LAGI" (SOAL BARU): Ketika pengguna menekan tombol "Main Lagi" / "Ulangi Permainan", sistem WAJIB menampilkan KUMPULAN SOAL BARU (diacak dari bank soal berbeda), bukan mengulang soal yang sama persis.
+- EVALUASI JAWABAN AUTOMATIS: Menyediakan skor akhir, feedback animasi ceria saat benar/salah, serta rangkuman nilai yang mendidik.
+
+INSTRUKSI PENGEMBANGAN:
+Buatkan struktur kode HTML, CSS, dan JavaScript interaktif lengkap (Single File Standalone Web App) yang siap langsung dijalankan di browser tanpa perlu dependensi luar rumit.`;
+        }
+
+        // Modal Controls
+        const modal = document.getElementById("promptModal");
+        const promptResult = document.getElementById("promptResult");
+        const generateBtn = document.getElementById("generateBtn");
+        const closeModalBtn = document.getElementById("closeModalBtn");
+        const copyBtn = document.getElementById("copyBtn");
+        const downloadBtn = document.getElementById("downloadBtn");
+
+        if (generateBtn) {
+            generateBtn.onclick = () => {
+                if (promptResult) promptResult.textContent = buildPrompt();
+                if (modal) modal.classList.remove("hidden");
+            };
+        }
+
+        if (closeModalBtn) {
+            closeModalBtn.onclick = () => {
+                if (modal) modal.classList.add("hidden");
+            };
+        }
+
+        if (copyBtn) {
+            copyBtn.onclick = () => {
+                if (promptResult && promptResult.textContent) {
+                    navigator.clipboard.writeText(promptResult.textContent);
+                    copyBtn.innerHTML = `<i class="fa-solid fa-check"></i> Tersalin!`;
+                    setTimeout(() => {
+                        copyBtn.innerHTML = `<i class="fa-solid fa-copy"></i> Salin ke Clipboard`;
+                    }, 2000);
+                }
+            };
+        }
+
+        if (downloadBtn) {
+            downloadBtn.onclick = () => {
+                if (promptResult && promptResult.textContent) {
+                    const blob = new Blob([promptResult.textContent], { type: "text/plain" });
+                    const url = URL.createObjectURL(blob);
+                    const a = document.createElement("a");
+                    a.href = url;
+                    a.download = "prompt-edu-doodleprint.txt";
+                    a.click();
+                    URL.revokeObjectURL(url);
+                }
+            };
+        }
+
+        // Inisialisasi Tampilan
+        renderAll();
+    </script>
+</body>
+</html>
