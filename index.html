@@ -8,7 +8,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts: Fredoka & Inter -->
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Font Awesome Icons Playful -->
+    <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script>
         tailwind.config = {
@@ -36,7 +36,6 @@
         .font-fredoka { 
             font-family: 'Fredoka', cursive, sans-serif; 
         }
-        /* Style Tombol Option / Chip */
         .chip { 
             transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1); 
             cursor: pointer; 
@@ -68,23 +67,20 @@
 </head>
 <body class="text-slate-800 min-h-screen pb-28">
 
-    <!-- Toast Notification Peringatan Maksimal 3 Game -->
+    <!-- Toast Notification -->
     <div id="toastMsg" class="fixed top-5 right-5 z-50 bg-amber-500 text-white px-5 py-3 rounded-2xl shadow-xl font-bold text-sm flex items-center gap-2 transform transition-all duration-300 translate-y-[-100px] opacity-0">
         <i class="fa-solid fa-triangle-exclamation text-lg"></i>
-        <span id="toastText">Maksimal memilih 3 jenis game!</span>
+        <span id="toastText">Pemberitahuan</span>
     </div>
 
     <!-- Header Branding Edu-DoodlePrint -->
     <header class="bg-white border-b-4 border-sky-200 py-6 px-4 shadow-sm mb-6">
         <div class="max-w-4xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
             
-            <!-- Logo & Brand Name -->
             <div class="flex flex-col sm:flex-row items-center gap-4">
-                <!-- Logo Presisi Sesuai Gambar -->
                 <div class="relative w-24 h-24 flex-shrink-0">
-                    <img src="1000537884.jpg" alt="Edu-DoodlePrint Logo" class="w-full h-full object-contain drop-shadow-md" onerror="this.style.display='none'; document.getElementById('fallbackLogo').style.display='block';">
+                    <img id="headerLogo" src="1000538651.jpg" alt="Edu-DoodlePrint Logo" class="w-full h-full object-contain drop-shadow-md" onerror="this.style.display='none'; document.getElementById('fallbackLogo').style.display='block';">
                     
-                    <!-- Fallback SVG jika file gambar belum di-host lokal -->
                     <div id="fallbackLogo" style="display:none;" class="w-24 h-24">
                         <svg viewBox="0 0 200 200" fill="none" class="w-full h-full">
                             <rect x="30" y="70" width="140" height="85" rx="32" fill="#7DD3FC" stroke="#0F172A" stroke-width="8"/>
@@ -96,7 +92,6 @@
                 </div>
 
                 <div>
-                    <!-- Nama Brand Edu-DoodlePrint dengan warna khas -->
                     <h1 class="text-3xl md:text-4xl font-fredoka font-bold tracking-tight">
                         <span class="text-[#FF6B6B]">Edu-Doodle</span><span class="text-[#38BDF8]">Print</span>
                     </h1>
@@ -112,7 +107,7 @@
         </div>
     </header>
 
-    <!-- Navigasi Langkah Cepat (Point 1 - 5) -->
+    <!-- Navigasi Langkah Cepat -->
     <nav class="sticky top-2 z-30 max-w-4xl mx-auto px-4 mb-6">
         <div class="bg-white/95 backdrop-blur-md p-2 rounded-2xl shadow-md border border-slate-200 flex items-center justify-between text-xs overflow-x-auto gap-1">
             <a href="#point-1" class="px-3 py-2 rounded-xl font-bold text-slate-700 hover:bg-sky-100 hover:text-sky-700 transition flex items-center gap-1.5 whitespace-nowrap">
@@ -122,13 +117,13 @@
                 📚 2. Materi Pembelajaran
             </a>
             <a href="#point-3" class="px-3 py-2 rounded-xl font-bold text-slate-700 hover:bg-sky-100 hover:text-sky-700 transition flex items-center gap-1.5 whitespace-nowrap">
-                🎓 3. Jumlah Soal & Siswa
+                🎓 3. Jumlah Soal & Umur
             </a>
             <a href="#point-4" class="px-3 py-2 rounded-xl font-bold text-slate-700 hover:bg-sky-100 hover:text-sky-700 transition flex items-center gap-1.5 whitespace-nowrap">
-                🎨 4. Tema & Visual Background
+                🎨 4. Tema & Leaderboard
             </a>
             <a href="#point-5" class="px-3 py-2 rounded-xl font-bold text-slate-700 hover:bg-sky-100 hover:text-sky-700 transition flex items-center gap-1.5 whitespace-nowrap">
-                🚀 5. Target AI
+                🚀 5. Target AI & Bahasa
             </a>
         </div>
     </nav>
@@ -136,32 +131,28 @@
     <!-- Container Utama -->
     <main class="max-w-4xl mx-auto px-4 space-y-6">
 
-        <!-- POINT 1: Jenis Game (Maksimal 3) & Bahasa -->
+        <!-- POINT 1: Jenis Game & Bahasa -->
         <section id="point-1" class="bg-white p-6 rounded-3xl shadow-sm border-2 border-slate-100">
             <div class="flex items-center justify-between mb-4">
                 <h2 class="text-lg font-fredoka font-bold text-slate-900 flex items-center gap-2">
                     <span class="w-8 h-8 bg-sky-100 text-sky-600 rounded-xl flex items-center justify-center text-sm font-bold">1</span>
-                    Jenis Game & Bahasa
+                    Jenis Game & Bahasa Game
                 </h2>
-                <span class="text-xs bg-rose-100 text-rose-600 font-bold px-3 py-1 rounded-full">
-                    Maksimal Pilih 3 Game
+                <span class="text-xs bg-sky-100 text-sky-700 font-bold px-3 py-1 rounded-full">
+                    Pilihan Bebas (Tanpa Batas)
                 </span>
             </div>
 
-            <!-- Opsi Jenis Game -->
             <div class="mb-5">
                 <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">
-                    Pilih Mekanik Game (Bisa pilih lebih dari 1, maksimal 3)
+                    Pilih Mekanik Game (Bisa pilih banyak sekaligus tanpa batasan)
                 </label>
-                <div class="flex flex-wrap gap-2" id="gameTypeContainer">
-                    <!-- Ditampilkan via JS -->
-                </div>
+                <div class="flex flex-wrap gap-2" id="gameTypeContainer"></div>
             </div>
 
-            <!-- Opsi Bahasa -->
             <div>
                 <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">
-                    Bahasa Pengantar Permainan
+                    Bahasa Pengantar Di Dalam Permainan
                 </label>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-3" id="languageContainer">
                     <div class="card-option active p-3 rounded-2xl border-2 border-slate-200 text-center text-sm font-bold flex items-center justify-center gap-2" data-lang="Bahasa Indonesia">
@@ -186,11 +177,9 @@
 
             <div class="mb-4">
                 <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">
-                    Pilih Topik Populer
+                    Pilih Topik Populer (Akan nonaktif jika mengetik di bawah)
                 </label>
-                <div class="flex flex-wrap gap-2" id="topicContainer">
-                    <!-- Ditampilkan via JS -->
-                </div>
+                <div class="flex flex-wrap gap-2" id="topicContainer"></div>
             </div>
 
             <div>
@@ -201,36 +190,33 @@
             </div>
         </section>
 
-        <!-- POINT 3: Jumlah Soal (Bebas Input User) & Target Siswa -->
+        <!-- POINT 3: Jumlah Soal & Target Usia -->
         <section id="point-3" class="bg-white p-6 rounded-3xl shadow-sm border-2 border-slate-100">
             <h2 class="text-lg font-fredoka font-bold text-slate-900 flex items-center gap-2 mb-4">
                 <span class="w-8 h-8 bg-sky-100 text-sky-600 rounded-xl flex items-center justify-center text-sm font-bold">3</span>
-                Jumlah Soal & Target Peserta Didik
+                Jumlah Soal & Target Usia / Umur Peserta Didik
             </h2>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-5">
-                <!-- Jumlah Soal Ditentukan Bebas Oleh User -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-5">
                 <div>
                     <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1" for="questionCountInput">
-                        Jumlah Soal (Bebas Ditentukan)
+                        Jumlah Soal (Bebas)
                     </label>
-                    <input type="text" id="questionCountInput" value="10 Soal" placeholder="Contoh: 12 Soal, 15 Pertanyaan, 20 Kartu" class="w-full px-3 py-3 text-sm rounded-2xl border-2 border-sky-300 focus:outline-none focus:border-sky-500 font-bold text-sky-600 bg-sky-50/50">
+                    <input type="text" id="questionCountInput" value="10 Soal" placeholder="Contoh: 12 Soal, 15 Pertanyaan" class="w-full px-4 py-3 text-sm rounded-2xl border-2 border-sky-300 focus:outline-none focus:border-sky-500 font-bold text-sky-600 bg-sky-50/50">
                 </div>
 
                 <div>
-                    <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1" for="educationLevel">Jenjang</label>
-                    <select id="educationLevel" class="w-full px-3 py-3 text-sm rounded-2xl border-2 border-slate-200 focus:outline-none focus:border-sky-500 bg-white font-medium">
-                        <option value="PAUD/TK">PAUD / TK</option>
-                        <option value="SD (Sekolah Dasar)" selected>SD (Sekolah Dasar)</option>
-                        <option value="SMP (Sekolah Menengah Pertama)">SMP (Sekolah Menengah Pertama)</option>
-                        <option value="SMA/SMK">SMA / SMK / Sederajat</option>
-                        <option value="Umum / Mahasiswa">Umum / Mahasiswa</option>
+                    <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1" for="targetAgeInput">
+                        Target Usia / Umur Peserta Didik
+                    </label>
+                    <select id="targetAgeInput" class="w-full px-4 py-3 text-sm rounded-2xl border-2 border-slate-200 focus:outline-none focus:border-sky-500 bg-white font-bold text-slate-700">
+                        <option value="3 - 5 Tahun (PAUD/TK)">3 - 5 Tahun (PAUD / TK)</option>
+                        <option value="6 - 8 Tahun (Anak-anak)" selected>6 - 8 Tahun (Anak-Anak)</option>
+                        <option value="9 - 12 Tahun (SD Akhir)">9 - 12 Tahun (SD Akhir)</option>
+                        <option value="13 - 15 Tahun (Remaja Awal)">13 - 15 Tahun (Remaja Awal)</option>
+                        <option value="16 - 18 Tahun (Remaja)">16 - 18 Tahun (Remaja)</option>
+                        <option value="18+ Tahun (Dewasa / Umum)">18+ Tahun (Dewasa / Umum)</option>
                     </select>
-                </div>
-
-                <div>
-                    <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1" for="classLevel">Kelas / Tingkat</label>
-                    <input type="text" id="classLevel" value="Kelas 4 - 5" class="w-full px-3 py-3 text-sm rounded-2xl border-2 border-slate-200 focus:outline-none focus:border-sky-500 font-medium">
                 </div>
             </div>
 
@@ -238,62 +224,82 @@
                 <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">
                     Tujuan Pembelajaran
                 </label>
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-2" id="bloomContainer">
-                    <!-- Ditampilkan via JS -->
-                </div>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-2" id="bloomContainer"></div>
             </div>
         </section>
 
-        <!-- POINT 4: Tema Background Game & Gaya Visual -->
+        <!-- POINT 4: Tema Background, Visual & Mode Leaderboard -->
         <section id="point-4" class="bg-white p-6 rounded-3xl shadow-sm border-2 border-slate-100">
             <h2 class="text-lg font-fredoka font-bold text-slate-900 flex items-center gap-2 mb-4">
                 <span class="w-8 h-8 bg-sky-100 text-sky-600 rounded-xl flex items-center justify-center text-sm font-bold">4</span>
-                Tema Background Game & Visual Interaktif
+                Tema Background, Visual & Mode Leaderboard
             </h2>
 
-            <!-- TAMBAHAN BARU: Menu Tema Background Game -->
             <div class="mb-5">
                 <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">
                     Pilih Tema Latar Belakang / Background Game
                 </label>
-                <div class="grid grid-cols-2 md:grid-cols-3 gap-3 mb-3" id="bgThemeContainer">
-                    <!-- Ditampilkan via JS -->
-                </div>
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-3 mb-3" id="bgThemeContainer"></div>
                 <input type="text" id="customBgTheme" placeholder="Ketik tema background kustom (Misal: Pemandangan Sawah, Kota Futuristik)" class="w-full px-4 py-2.5 text-xs rounded-2xl border-2 border-slate-200 focus:outline-none focus:border-sky-500">
+            </div>
+
+            <div class="mb-5 p-4 bg-amber-50/70 rounded-2xl border-2 border-amber-200">
+                <label class="block text-xs font-bold text-amber-900 uppercase tracking-wider mb-2">
+                    🏆 Mode Papan Peringkat / Leaderboard Kelas (Sinkronisasi Skor)
+                </label>
+                <p class="text-[11px] text-amber-800 mb-3">
+                    Pilih bagaimana skor antar siswa (misal Asep dan Ujang) digabungkan dalam satu papan peringkat.
+                </p>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3" id="leaderboardModeContainer">
+                    <div class="card-option active p-3 rounded-2xl border-2 border-amber-300 text-center text-xs font-bold flex items-center justify-center gap-2 bg-white" data-lb-mode="Online Real-Time (Cloud / Firebase / Lintas Perangkat)">
+                        <span>☁️</span> Online Real-Time (Lintas Perangkat)
+                    </div>
+                    <div class="card-option p-3 rounded-2xl border-2 border-slate-200 text-center text-xs font-bold flex items-center justify-center gap-2 bg-white" data-lb-mode="Lokal (Satu Perangkat / Browser Saja)">
+                        <span>💻</span> Lokal (Satu Perangkat Saja)
+                    </div>
+                </div>
             </div>
 
             <div class="mb-5">
                 <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">
-                    Gaya Visual UI Game
+                    Gaya Visual UI Game (Termasuk Roblox & Mario Bros)
                 </label>
-                <div class="grid grid-cols-2 md:grid-cols-3 gap-3" id="visualStyleContainer">
-                    <!-- Ditampilkan via JS -->
-                </div>
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-3" id="visualStyleContainer"></div>
             </div>
 
             <div>
                 <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">
                     Fitur & Elemen Permainan
                 </label>
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-2" id="featureContainer">
-                    <!-- Ditampilkan via JS -->
-                </div>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-2" id="featureContainer"></div>
             </div>
         </section>
 
-        <!-- POINT 5: Target AI (Termasuk ChatGPT) & Branding -->
+        <!-- POINT 5: Target AI & Bahasa Output Prompt -->
         <section id="point-5" class="bg-white p-6 rounded-3xl shadow-sm border-2 border-slate-100">
             <h2 class="text-lg font-fredoka font-bold text-slate-900 flex items-center gap-2 mb-4">
                 <span class="w-8 h-8 bg-sky-100 text-sky-600 rounded-xl flex items-center justify-center text-sm font-bold">5</span>
-                Target AI Builder & Branding Creator
+                Target AI Builder & Bahasa Hasil Prompt
             </h2>
 
-            <div class="mb-4">
+            <div class="mb-5">
                 <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">
                     Target AI Builder (Termasuk ChatGPT)
                 </label>
-                <div class="flex flex-wrap gap-2" id="aiTargetContainer">
-                    <!-- Ditampilkan via JS -->
+                <div class="flex flex-wrap gap-2" id="aiTargetContainer"></div>
+            </div>
+
+            <div class="mb-5 p-4 bg-sky-50/70 rounded-2xl border-2 border-sky-100">
+                <label class="block text-xs font-bold text-sky-900 uppercase tracking-wider mb-2">
+                    🌐 Bahasa Output Prompt AI (Hasil Generate)
+                </label>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3" id="promptLanguageContainer">
+                    <div class="card-option active p-3 rounded-2xl border-2 border-slate-200 text-center text-xs font-bold flex items-center justify-center gap-2" data-prompt-lang="Bahasa Indonesia">
+                        <span>🇮🇩</span> Bahasa Indonesia
+                    </div>
+                    <div class="card-option p-3 rounded-2xl border-2 border-slate-200 text-center text-xs font-bold flex items-center justify-center gap-2" data-prompt-lang="English">
+                        <span>🇬🇧</span> English
+                    </div>
                 </div>
             </div>
 
@@ -314,6 +320,11 @@
         </section>
 
     </main>
+
+    <!-- Footer Versi Aplikasi -->
+    <footer class="mt-12 text-center text-xs font-semibold text-slate-400 py-4">
+        Edu-DoodlePrint Creator &bull; Versi 1.1 | 07.10.2026
+    </footer>
 
     <!-- Floating Action Bar Bottom -->
     <div class="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-md border-t-2 border-slate-200 py-3.5 px-4 z-40 shadow-2xl">
@@ -352,7 +363,6 @@
 
     <!-- Script Logika Aplikasi -->
     <script>
-        // Data Mekanik Game
         const gameTypes = [
             { name: "Drag & Drop", icon: "fa-solid fa-hand-pointer" },
             { name: "Matching / Jodohkan", icon: "fa-solid fa-puzzle-piece" },
@@ -374,7 +384,6 @@
             { name: "Roda Putar Soal", icon: "fa-solid fa-dharmachakra" }
         ];
 
-        // Data Tema Background Game (Fitur Baru)
         const bgThemes = [
             { name: "Pemandangan Alam", icon: "fa-solid fa-mountain-sun" },
             { name: "Luar Angkasa / Space", icon: "fa-solid fa-rocket" },
@@ -406,13 +415,15 @@
             { name: "Numerasi", icon: "fa-solid fa-calculator" }
         ];
 
+        // Penambahan Gaya Visual Roblox & Mario Bros
         const visualStyles = [
+            { name: "Roblox 3D Block Style", icon: "fa-solid fa-cube" },
+            { name: "Mario Bros Retro Arcade", icon: "fa-solid fa-gamepad" },
             { name: "3D Felt Toys Pastel", icon: "fa-solid fa-cubes" },
             { name: "Cute Cartoon Ceria", icon: "fa-solid fa-face-smile" },
             { name: "Flat Illustration Minimalis", icon: "fa-solid fa-vector-square" },
             { name: "Nature & Flora Kids", icon: "fa-solid fa-tree" },
-            { name: "Space Adventure Galaxy", icon: "fa-solid fa-rocket" },
-            { name: "Pixel Retro Arcade", icon: "fa-solid fa-gamepad" }
+            { name: "Space Adventure Galaxy", icon: "fa-solid fa-rocket" }
         ];
 
         const gameFeatures = [
@@ -422,10 +433,10 @@
             { name: "Animasi feedback", icon: "fa-solid fa-wand-magic-sparkles" },
             { name: "Hint / Petunjuk bantuan", icon: "fa-solid fa-lightbulb" },
             { name: "Sistem bintang / Skor", icon: "fa-solid fa-star" },
+            { name: "Peringkat / Leaderboard Kelas", icon: "fa-solid fa-trophy" },
             { name: "Pembahasan jawaban", icon: "fa-solid fa-graduation-cap" }
         ];
 
-        // Target AI Termasuk ChatGPT
         const aiTargets = [
             { name: "ChatGPT", icon: "fa-solid fa-comments" },
             { name: "Google AI Studio", icon: "fa-solid fa-robot" },
@@ -435,17 +446,29 @@
             { name: "Canva", icon: "fa-solid fa-palette" }
         ];
 
-        // State Penyimpanan Pilihan
-        let selectedGameTypes = ["Drag & Drop"]; // Maksimal 3
+        // State Penyimpanan
+        let selectedGameTypes = ["Drag & Drop"];
         let selectedLanguage = "Bahasa Indonesia";
+        let selectedPromptLanguage = "Bahasa Indonesia";
+        let selectedLeaderboardMode = "Online Real-Time (Cloud / Firebase / Lintas Perangkat)";
         let selectedTopics = ["Ekosistem & Rantai Makanan"];
         let selectedBgTheme = "Pemandangan Alam";
         let selectedBloom = ["Memahami", "Menerapkan"];
-        let selectedStyle = "3D Felt Toys Pastel";
-        let selectedFeatures = ["Progressbar / Level", "Suara & efek audio", "Sistem bintang / Skor"];
+        let selectedStyle = "Roblox 3D Block Style";
+        let selectedFeatures = ["Progressbar / Level", "Suara & efek audio", "Sistem bintang / Skor", "Peringkat / Leaderboard Kelas"];
         let selectedAITargets = ["ChatGPT"];
 
-        // Toast Helper
+        // Event Listener untuk Input Materi Spesifik (Mengosongkan Topik Populer jika diketik)
+        const customTopicInput = document.getElementById("customTopic");
+        if (customTopicInput) {
+            customTopicInput.addEventListener("input", () => {
+                if (customTopicInput.value.trim().length > 0) {
+                    selectedTopics = []; // Nonaktifkan pilihan topik populer
+                    renderAll();
+                }
+            });
+        }
+
         function showToast(message) {
             const toast = document.getElementById("toastMsg");
             const toastText = document.getElementById("toastText");
@@ -460,8 +483,7 @@
             }
         }
 
-        // Render Opsi Chip
-        function renderChips(containerId, items, selectedArray, isMulti = true, maxLimit = 99) {
+        function renderChips(containerId, items, selectedArray, isMulti = true) {
             const container = document.getElementById(containerId);
             if (!container) return;
             container.innerHTML = "";
@@ -493,16 +515,17 @@
                                 const index = selectedArray.indexOf(name);
                                 selectedArray.splice(index, 1);
                             } else {
-                                showToast("Pilih minimal 1 jenis game!");
+                                showToast("Pilih minimal 1 opsi!");
                             }
                         } else {
-                            if (selectedArray.length >= maxLimit) {
-                                showToast(`Maksimal hanya boleh memilih ${maxLimit} jenis game!`);
-                                return;
-                            }
                             selectedArray.push(name);
                         }
                     } else {
+                        // Jika mengklik topik populer, reset input custom topik
+                        if (containerId === "topicContainer") {
+                            const customInput = document.getElementById("customTopic");
+                            if (customInput) customInput.value = "";
+                        }
                         selectedArray.length = 0;
                         selectedArray.push(name);
                     }
@@ -512,7 +535,6 @@
             });
         }
 
-        // Render Opsi Card
         function renderCards(containerId, items, selectedValue, onSelect) {
             const container = document.getElementById(containerId);
             if (!container) return;
@@ -542,9 +564,8 @@
             });
         }
 
-        // Render Ulang Seluruh UI
         function renderAll() {
-            renderChips("gameTypeContainer", gameTypes, selectedGameTypes, true, 3);
+            renderChips("gameTypeContainer", gameTypes, selectedGameTypes, true);
             renderChips("topicContainer", popularTopics, selectedTopics, false);
             renderChips("bloomContainer", bloomLevels, selectedBloom, true);
             renderChips("featureContainer", gameFeatures, selectedFeatures, true);
@@ -560,9 +581,27 @@
                 renderAll();
             });
 
+            document.querySelectorAll("#leaderboardModeContainer .card-option").forEach((card) => {
+                const mode = card.getAttribute("data-lb-mode");
+                if (mode === selectedLeaderboardMode) {
+                    card.classList.add("active", "border-amber-400");
+                } else {
+                    card.classList.remove("active", "border-amber-400");
+                }
+            });
+
             document.querySelectorAll("#languageContainer .card-option").forEach((card) => {
                 const lang = card.getAttribute("data-lang");
                 if (lang === selectedLanguage) {
+                    card.classList.add("active");
+                } else {
+                    card.classList.remove("active");
+                }
+            });
+
+            document.querySelectorAll("#promptLanguageContainer .card-option").forEach((card) => {
+                const pLang = card.getAttribute("data-prompt-lang");
+                if (pLang === selectedPromptLanguage) {
                     card.classList.add("active");
                 } else {
                     card.classList.remove("active");
@@ -575,7 +614,16 @@
             }
         }
 
-        // Event Listener Bahasa
+        document.querySelectorAll("#leaderboardModeContainer .card-option").forEach((card) => {
+            card.addEventListener("click", () => {
+                const mode = card.getAttribute("data-lb-mode");
+                if (mode) {
+                    selectedLeaderboardMode = mode;
+                    renderAll();
+                }
+            });
+        });
+
         document.querySelectorAll("#languageContainer .card-option").forEach((card) => {
             card.addEventListener("click", () => {
                 const lang = card.getAttribute("data-lang");
@@ -586,57 +634,122 @@
             });
         });
 
-        // Generator Prompt AI Edu-DoodlePrint
+        document.querySelectorAll("#promptLanguageContainer .card-option").forEach((card) => {
+            card.addEventListener("click", () => {
+                const pLang = card.getAttribute("data-prompt-lang");
+                if (pLang) {
+                    selectedPromptLanguage = pLang;
+                    renderAll();
+                }
+            });
+        });
+
+        // Generator Prompt AI
         function buildPrompt() {
             const customTopicInput = document.getElementById("customTopic");
             const topicValue = customTopicInput ? customTopicInput.value.trim() : "";
-            const finalTopic = topicValue ? topicValue : selectedTopics.join(", ");
+            const finalTopic = topicValue ? topicValue : (selectedTopics.length > 0 ? selectedTopics.join(", ") : "Materi Umum Edukasi");
 
             const customBgInput = document.getElementById("customBgTheme");
             const bgValue = customBgInput ? customBgInput.value.trim() : "";
             const finalBgTheme = bgValue ? bgValue : selectedBgTheme;
             
-            const levelElem = document.getElementById("educationLevel");
-            const classElem = document.getElementById("classLevel");
+            const ageElem = document.getElementById("targetAgeInput");
             const qCountElem = document.getElementById("questionCountInput");
             const brandElem = document.getElementById("creatorBrand");
             const extraElem = document.getElementById("extraInstructions");
 
-            const level = levelElem ? levelElem.value : "SD (Sekolah Dasar)";
-            const classLvl = classElem ? classElem.value : "Kelas 4 - 5";
+            const targetAge = ageElem ? ageElem.value : "6 - 8 Tahun (Anak-Anak)";
             const qCount = (qCountElem && qCountElem.value.trim()) ? qCountElem.value.trim() : "10 Soal";
             const brand = (brandElem && brandElem.value.trim()) ? brandElem.value.trim() : "Edu-DoodlePrint";
             const extraNote = (extraElem && extraElem.value.trim()) ? extraElem.value.trim() : "Tampilan ramah anak, responsif, dan interaktif.";
 
+            let logoInstructionId = `Gunakan Logo Default Edu-DoodlePrint (1000538651.jpg) pada header game.`;
+            let logoInstructionEn = `Use Default Edu-DoodlePrint Logo (1000538651.jpg) in the game header.`;
+
+            let lbInstructionId = "";
+            let lbInstructionEn = "";
+            if (selectedLeaderboardMode.includes("Online Real-Time")) {
+                lbInstructionId = `- SINKRONISASI LEADERBOARD ONLINE (Lintas Perangkat): Gunakan backend database cloud gratis (seperti Firebase Realtime Database atau MockAPI / SheetDB) secara otomatis di dalam kode game, sehingga skor siswa dari perangkat/tab berbeda (misal Asep dan Ujang) dapat tergabung dan tersinkronisasi secara real-time ke dalam satu papan peringkat kelas yang sama.`;
+                lbInstructionEn = `- ONLINE REAL-TIME LEADERBOARD SYNC (Cross-Device): Automatically integrate a free cloud database backend (such as Firebase Realtime Database or MockAPI / SheetDB) into the game code so that scores from different devices/tabs (e.g., Asep and Ujang) are merged and synchronized in real-time into the same class leaderboard.`;
+            } else {
+                lbInstructionId = `- SINKRONISASI LEADERBOARD LOKAL: Gunakan LocalStorage browser untuk menyimpan skor pada perangkat yang sama.`;
+                lbInstructionEn = `- LOCAL LEADERBOARD SYNC: Use browser LocalStorage to store scores on the same device.`;
+            }
+
+            if (selectedPromptLanguage === "English") {
+                return `INTERACTIVE EDUCATIONAL GAME & QUIZ SPECIFICATION PROMPT (Edu-DoodlePrint)
+
+Target AI Builder: ${selectedAITargets.join(", ")}
+Brand / Creator: ${brand}
+Game Interface Language: ${selectedLanguage}
+
+1. MAIN GAME SPECIFICATIONS
+- Game Mechanics: ${selectedGameTypes.join(", ")}
+- Subject / Topic: ${finalTopic}
+- Target Age Group: ${targetAge}
+- Number of Questions / Challenges: ${qCount}
+
+2. START SCREEN & USER ONBOARDING
+- Landing/Start Screen: The game MUST feature a modern interactive start screen (similar to Wayground / Quizizz / Kahoot).
+- Include a "Student Name" input field and a prominent, playful "Start Game" button.
+- The entered student name must be recorded and used to greet the student and display scores on the class leaderboard.
+
+3. BACKGROUND THEME & VISUAL STYLE
+- Game Logo: ${logoInstructionEn}
+- Background Theme: ${finalBgTheme} (Must be animated / interactive moving elements)
+- UI Visual Style: ${selectedStyle}
+
+4. LEARNING OBJECTIVES & GAME FEATURES
+- Learning Objectives: ${selectedBloom.join(", ")}
+- Interactive Features: ${selectedFeatures.join(", ")}
+${lbInstructionEn}
+- Additional Notes: ${extraNote}
+
+5. MANDATORY GAMEPLAY & REPLAYABILITY REQUIREMENTS:
+- DYNAMIC BACKGROUND: The game background must feel alive (e.g., animated clouds, stars, or underwater fish matching "${finalBgTheme}").
+- "PLAY AGAIN" (NEW QUESTIONS): When the "Play Again" button is clicked, the system MUST shuffle and present a NEW SET of questions rather than repeating the same ones.
+- EVALUATION & LEADERBOARD: Provide score tracking, timers, celebratory feedback animations, and a class leaderboard ranking.
+
+DEVELOPMENT INSTRUCTION:
+Generate a complete, single-file standalone web application (HTML, CSS, JavaScript) that is ready to run directly in any web browser.`;
+            }
+
             return `PROMPT SPESIFIKASI GAME & KUIS EDUKASI INTERAKTIF (Edu-DoodlePrint)
 
 Target AI Builder: ${selectedAITargets.join(", ")}
-Brand / Creator: ${brand} (Logo Maskot Printer Edu-DoodlePrint)
-Bahasa Pengantar: ${selectedLanguage}
+Brand / Creator: ${brand}
+Bahasa Pengantar Game: ${selectedLanguage}
 
 1. SPESIFIKASI UTAMA PERMAINAN
-- Jenis Game: ${selectedGameTypes.join(", ")} (Maksimal 3 jenis)
+- Jenis Game: ${selectedGameTypes.join(", ")}
 - Topik / Materi: ${finalTopic}
-- Sasaran Siswa: ${level} (${classLvl})
+- Target Usia / Umur Peserta Didik: ${targetAge}
 - Jumlah Soal / Tantangan: ${qCount}
 
-2. TEMA BACKGROUND & VISUAL INTERAKTIF
-- Tema Background Game: ${finalBgTheme} (Wajib Dibuat Animatif / Interaktif)
-- Gaya Visual UI: ${selectedStyle}
-- Branding Header: Menampilkan Logo Maskot Printer Edu-DoodlePrint dengan nuansa warna khas yang sama secara konsisten.
+2. TAMPILAN AWAL GAME (START SCREEN)
+- Tampilan Pembuka (Start Screen): Game Wajib memiliki layar awal interaktif bergaya platform modern (seperti Wayground / Quizizz / Kahoot).
+- Terdapat Form Input "Masukkan Nama Siswa" dan Tombol "Mulai Game" (Start Game) yang menonjol dan ceria.
+- Nama siswa yang diinput wajib dicatat dan digunakan untuk menyapa siswa serta menampilkan skor pada papan peringkat/leaderboard.
 
-3. TUJUAN PEMBELAJARAN & MEKANIK PERMAINAN
+3. TEMA BACKGROUND & VISUAL INTERAKTIF
+- Logo Game: ${logoInstructionId}
+- Tema Background Game: ${finalBgTheme} (Wajib Dibuat Animatif / Interaktif Bergerak)
+- Gaya Visual UI: ${selectedStyle}
+
+4. TUJUAN PEMBELAJARAN & FITUR ELEMEN
 - Tujuan Pembelajaran: ${selectedBloom.join(", ")}
 - Fitur Interaktif: ${selectedFeatures.join(", ")}
+${lbInstructionId}
 - Catatan Tambahan: ${extraNote}
 
-4. SYARAT WAJIB GAMEPLAY & KUALITAS REPLAYABILITY:
-- BACKGROUND DINAMIS & INTERAKTIF: Latar belakang game wajib dibuat hidup dan interaktif sesuai tema "${finalBgTheme}" (contoh: pemandangan dengan awan bergerak, luar angkasa dengan bintang berkedip, atau efek elemen interaktif lainnya).
-- TOMBOL "MAIN LAGI" (SOAL BARU): Ketika pengguna menekan tombol "Main Lagi" / "Ulangi Permainan", sistem WAJIB menampilkan KUMPULAN SOAL BARU (diacak dari bank soal berbeda), bukan mengulang soal yang sama persis.
-- EVALUASI JAWABAN AUTOMATIS: Menyediakan skor akhir, feedback animasi ceria saat benar/salah, serta rangkuman nilai yang mendidik.
+5. SYARAT WAJIB GAMEPLAY & KUALITAS REPLAYABILITY:
+- BACKGROUND DINAMIS: Latar belakang game wajib hidup (contoh: awan/bintang/ikan bergerak sesuai tema "${finalBgTheme}").
+- TOMBOL "MAIN LAGI" (SOAL BARU): Ketika tombol "Main Lagi" diklik, sistem WAJIB mengacak dan menampilkan KUMPULAN SOAL BARU, bukan soal yang sama.
+- EVALUASI & LEADERBOARD: Menyediakan pencatatan skor, waktu, animasi selebrasi jawaban, serta tabel peringkat skor kelas.
 
 INSTRUKSI PENGEMBANGAN:
-Buatkan struktur kode HTML, CSS, dan JavaScript interaktif lengkap (Single File Standalone Web App) yang siap langsung dijalankan di browser tanpa perlu dependensi luar rumit.`;
+Buatkan struktur kode HTML, CSS, dan JavaScript interaktif lengkap (Single File Standalone Web App) yang siap langsung dijalankan di browser.`;
         }
 
         // Modal Controls
@@ -686,7 +799,7 @@ Buatkan struktur kode HTML, CSS, dan JavaScript interaktif lengkap (Single File 
             };
         }
 
-        // Inisialisasi Tampilan
+        // Render Awal
         renderAll();
     </script>
 </body>
