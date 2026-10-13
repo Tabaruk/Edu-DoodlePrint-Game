@@ -114,13 +114,13 @@
                 🎮 1. Jenis Game
             </a>
             <a href="#point-2" class="px-3 py-2 rounded-xl font-bold text-slate-700 hover:bg-sky-100 hover:text-sky-700 transition flex items-center gap-1.5 whitespace-nowrap">
-                📚 2. Kementerian & Materi
+                📚 2. Kategori & Materi
             </a>
             <a href="#point-3" class="px-3 py-2 rounded-xl font-bold text-slate-700 hover:bg-sky-100 hover:text-sky-700 transition flex items-center gap-1.5 whitespace-nowrap">
                 🎓 3. Kelas & Soal
             </a>
             <a href="#point-4" class="px-3 py-2 rounded-xl font-bold text-slate-700 hover:bg-sky-100 hover:text-sky-700 transition flex items-center gap-1.5 whitespace-nowrap">
-                🎨 4. Tema & Leaderboard
+                🎨 4. Tema, Musik & Leaderboard
             </a>
             <a href="#point-5" class="px-3 py-2 rounded-xl font-bold text-slate-700 hover:bg-sky-100 hover:text-sky-700 transition flex items-center gap-1.5 whitespace-nowrap">
                 🚀 5. Target AI & Bahasa
@@ -168,30 +168,33 @@
             </div>
         </section>
 
-        <!-- POINT 2: Kementerian & Materi Pembelajaran -->
+        <!-- POINT 2: Kementerian & Materi Pembelajaran (Termasuk TK Particular) -->
         <section id="point-2" class="bg-white p-6 rounded-3xl shadow-sm border-2 border-slate-100">
             <h2 class="text-lg font-fredoka font-bold text-slate-900 flex items-center gap-2 mb-4">
                 <span class="w-8 h-8 bg-sky-100 text-sky-600 rounded-xl flex items-center justify-center text-sm font-bold">2</span>
-                Kementerian & Materi Pembelajaran
+                Instansi Kurikulum & Materi Pembelajaran
             </h2>
 
             <div class="mb-5">
                 <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">
-                    Pilih Instansi / Kurikulum Kementerian
+                    Pilih Instansi / Kurikulum Pembelajaran
                 </label>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3" id="ministryContainer">
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3" id="ministryContainer">
                     <div class="card-option active p-3 rounded-2xl border-2 border-slate-200 text-center text-xs font-bold flex items-center justify-center gap-2" data-ministry="Kemendikdasmen">
                         <span>🏫</span> Kemendikdasmen (Umum)
                     </div>
                     <div class="card-option p-3 rounded-2xl border-2 border-slate-200 text-center text-xs font-bold flex items-center justify-center gap-2" data-ministry="Kemenag">
                         <span>🕌</span> Kemenag (Madrasah / Keagamaan)
                     </div>
+                    <div class="card-option p-3 rounded-2xl border-2 border-slate-200 text-center text-xs font-bold flex items-center justify-center gap-2" data-ministry="TK Particular">
+                        <span>🧸</span> TK Particular (PAUD / TK)
+                    </div>
                 </div>
             </div>
 
             <div class="mb-4">
                 <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2" id="topicLabel">
-                    Pilih Topik Populer (Menyesuaikan Kementerian)
+                    Pilih Topik Populer (Menyesuaikan Kurikulum)
                 </label>
                 <div class="flex flex-wrap gap-2" id="topicContainer"></div>
             </div>
@@ -200,7 +203,7 @@
                 <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1" for="customTopic">
                     Atau Ketik Materi / Tema Spesifik Anda
                 </label>
-                <input type="text" id="customTopic" placeholder="Contoh: Tata Surya, Fikih Shalat Berjamaah, Majas Gaya Bahasa" class="w-full px-4 py-3 text-sm rounded-2xl border-2 border-slate-200 focus:outline-none focus:border-sky-500 transition">
+                <input type="text" id="customTopic" placeholder="Contoh: Mengenal Warna & Bentuk, Tata Surya, Fikih Shalat" class="w-full px-4 py-3 text-sm rounded-2xl border-2 border-slate-200 focus:outline-none focus:border-sky-500 transition">
             </div>
         </section>
 
@@ -217,20 +220,7 @@
                         Pilih Jenjang Kelas Peserta Didik
                     </label>
                     <select id="gradeLevelInput" class="w-full px-4 py-3 text-sm rounded-2xl border-2 border-sky-300 focus:outline-none focus:border-sky-500 bg-sky-50/50 font-bold text-sky-700">
-                        <option value="TK A">TK A (Usia 4-5 Tahun)</option>
-                        <option value="TK B">TK B (Usia 5-6 Tahun)</option>
-                        <option value="SD Kelas 1">SD Kelas 1</option>
-                        <option value="SD Kelas 2">SD Kelas 2</option>
-                        <option value="SD Kelas 3" selected>SD Kelas 3</option>
-                        <option value="SD Kelas 4">SD Kelas 4</option>
-                        <option value="SD Kelas 5">SD Kelas 5</option>
-                        <option value="SD Kelas 6">SD Kelas 6</option>
-                        <option value="SMP Kelas 7">SMP Kelas 7</option>
-                        <option value="SMP Kelas 8">SMP Kelas 8</option>
-                        <option value="SMP Kelas 9">SMP Kelas 9</option>
-                        <option value="SMA Kelas 10">SMA Kelas 10</option>
-                        <option value="SMA Kelas 11">SMA Kelas 11</option>
-                        <option value="SMA Kelas 12">SMA Kelas 12</option>
+                        <!-- Opsi akan dirender secara dinamis oleh JS -->
                     </select>
                 </div>
 
@@ -250,11 +240,11 @@
             </div>
         </section>
 
-        <!-- POINT 4: Tema Background, Visual & Elemen Permainan -->
+        <!-- POINT 4: Tema Background, Visual, Musik & Leaderboard -->
         <section id="point-4" class="bg-white p-6 rounded-3xl shadow-sm border-2 border-slate-100">
             <h2 class="text-lg font-fredoka font-bold text-slate-900 flex items-center gap-2 mb-4">
                 <span class="w-8 h-8 bg-sky-100 text-sky-600 rounded-xl flex items-center justify-center text-sm font-bold">4</span>
-                Tema Background, Visual & Elemen Permainan
+                Tema Background, Gaya Visual, Musik & Leaderboard
             </h2>
 
             <div class="mb-5">
@@ -262,16 +252,36 @@
                     Pilih Tema Latar Belakang / Background Game
                 </label>
                 <div class="grid grid-cols-2 md:grid-cols-3 gap-3 mb-3" id="bgThemeContainer"></div>
-                <input type="text" id="customBgTheme" placeholder="Ketik tema background kustom (Misal: Pemandangan Sawah, Kota Futuristik)" class="w-full px-4 py-2.5 text-xs rounded-2xl border-2 border-slate-200 focus:outline-none focus:border-sky-500">
+                <input type="text" id="customBgTheme" placeholder="Ketik tema background kustom (Misal: Pemandangan Sawah, Taman Bermain Anak)" class="w-full px-4 py-2.5 text-xs rounded-2xl border-2 border-slate-200 focus:outline-none focus:border-sky-500">
             </div>
 
+            <!-- PERBAIKAN GAYA VISUAL UI LENGKAP -->
             <div class="mb-5">
                 <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">
-                    Gaya Visual UI Game (Termasuk Roblox & Mario Bros)
+                    Gaya Visual UI Game
                 </label>
                 <div class="grid grid-cols-2 md:grid-cols-3 gap-3" id="visualStyleContainer"></div>
             </div>
 
+            <!-- OPSI MUSIK / BGM GAME -->
+            <div class="mb-5">
+                <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">
+                    🎵 Musik Pengiring / Background Music (BGM) Game
+                </label>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-3" id="musicOptionContainer">
+                    <div class="card-option active p-3 rounded-2xl border-2 border-slate-200 text-center text-xs font-bold flex items-center justify-center gap-2" data-music="Musik Ceria Soft & Playful (Audio Synth Ceria Rendah)">
+                        <span>🎶</span> Musik Ceria Soft (Biasa)
+                    </div>
+                    <div class="card-option p-3 rounded-2xl border-2 border-slate-200 text-center text-xs font-bold flex items-center justify-center gap-2" data-music="Musik Instrumental Lofi Edukasi (Fokus & Santai)">
+                        <span>🎧</span> Musik Lofi Santai (Fokus)
+                    </div>
+                    <div class="card-option p-3 rounded-2xl border-2 border-slate-200 text-center text-xs font-bold flex items-center justify-center gap-2" data-music="Tanpa Musik (Efek Suara Saja)">
+                        <span>🔇</span> Tanpa Musik (Sound Effect Only)
+                    </div>
+                </div>
+            </div>
+
+            <!-- FITUR ELEMEN -->
             <div class="mb-5">
                 <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">
                     Fitur & Elemen Permainan (Centang untuk Mengaktifkan)
@@ -279,8 +289,8 @@
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-2" id="featureContainer"></div>
             </div>
 
-            <!-- OPSI LEADERBOARD DIBUAT DEDICATED DI BAWAH FITUR & OPSIONAL -->
-            <div id="leaderboardOptionBox" class="p-4 bg-amber-50/70 rounded-2xl border-2 border-amber-200 transition-all duration-300">
+            <!-- OPSI LEADERBOARD OPSIONAL DI BAWAH FITUR ELEMEN -->
+            <div id="leaderboardOptionBox" class="p-4 bg-amber-50/70 rounded-2xl border-2 border-amber-200 transition-all duration-300 hidden">
                 <label class="block text-xs font-bold text-amber-900 uppercase tracking-wider mb-1">
                     🏆 Opsi Mode Papan Peringkat / Leaderboard Kelas
                 </label>
@@ -416,6 +426,7 @@
             { name: "Papan Tulis Sekolah", icon: "fa-solid fa-chalkboard-user" }
         ];
 
+        // TOPIC KHUSUS TK PARTICULAR, KEMENDIKDASMEN, DAN KEMENAG
         const ministryTopics = {
             "Kemendikdasmen": [
                 { name: "Matematika", icon: "fa-solid fa-calculator" },
@@ -434,6 +445,14 @@
                 { name: "Sejarah Kebudayaan Islam (SKI)", icon: "fa-solid fa-mosque" },
                 { name: "Bahasa Arab", icon: "fa-solid fa-comments" },
                 { name: "Hadis & Tarikh", icon: "fa-solid fa-scroll" }
+            ],
+            "TK Particular": [
+                { name: "Mengenal Angka & Berhitung Dasar", icon: "fa-solid fa-[#123]" },
+                { name: "Mengenal Huruf & Kata Sederhana", icon: "fa-solid fa-font" },
+                { name: "Mengenal Warna & Bentuk Geometri", icon: "fa-solid fa-shapes" },
+                { name: "Anggota Tubuhku & Panca Indra", icon: "fa-solid fa-child" },
+                { name: "Dunia Hewan & Tumbuhan", icon: "fa-solid fa-paw" },
+                { name: "Profesi & Cita-Citaku", icon: "fa-solid fa-user-tie" }
             ]
         };
 
@@ -447,14 +466,17 @@
             { name: "Numerasi", icon: "fa-solid fa-calculator" }
         ];
 
+        // GAYA VISUAL DITAMBAHKAN DAN DIBERSIHKAN DARI TEKS AMBIGU
         const visualStyles = [
             { name: "Roblox 3D Block Style", icon: "fa-solid fa-cube" },
             { name: "Mario Bros Retro Arcade", icon: "fa-solid fa-gamepad" },
-            { name: "3D Felt Toys Pastel", icon: "fa-solid fa-cubes" },
+            { name: "Pixel Art 8-Bit Retro", icon: "fa-solid fa-grip" },
+            { name: "3D Claymation / Origami", icon: "fa-solid fa-cubes" },
             { name: "Cute Cartoon Ceria", icon: "fa-solid fa-face-smile" },
-            { name: "Flat Illustration Minimalis", icon: "fa-solid fa-vector-square" },
-            { name: "Nature & Flora Kids", icon: "fa-solid fa-tree" },
-            { name: "Space Adventure Galaxy", icon: "fa-solid fa-rocket" }
+            { name: "Paper Cutout Art", icon: "fa-solid fa-scissors" },
+            { name: "Doodle Hand-Drawn Style", icon: "fa-solid fa-pen-nib" },
+            { name: "Neon Cyber / Futuristic", icon: "fa-solid fa-bolt" },
+            { name: "Watercolor / Lukisan Cat Air", icon: "fa-solid fa-paintbrush" }
         ];
 
         const gameFeatures = [
@@ -478,15 +500,17 @@
 
         // State Penyimpanan
         let selectedGameTypes = ["Drag & Drop"];
-        let selectedLanguage = "Bahasa Indonesia"; // Bahasa Pengantar Game (Point 1)
-        let selectedPromptLanguage = "Bahasa Indonesia"; // Bahasa Hasil Prompt (Point 5)
+        let selectedLanguage = "Bahasa Indonesia";
+        let selectedPromptLanguage = "Bahasa Indonesia";
         let selectedMinistry = "Kemendikdasmen";
         let selectedLeaderboardMode = "Online Google Sheets (Database Rekap Nilai Guru via Apps Script)";
         let selectedTopics = ["Matematika"];
         let selectedBgTheme = "Pemandangan Alam";
         let selectedBloom = ["Memahami", "Menerapkan"];
         let selectedStyle = "Roblox 3D Block Style";
-        let selectedFeatures = ["Progressbar / Level", "Suara & efek audio", "Sistem bintang / Skor", "Peringkat / Leaderboard Kelas"];
+        let selectedMusic = "Musik Ceria Soft & Playful (Audio Synth Ceria Rendah)";
+        // PERBAIKAN: LEADERBOARD TIDAK DEFAULT DIBUAT CENTANG
+        let selectedFeatures = ["Progressbar / Level", "Suara & efek audio", "Sistem bintang / Skor"];
         let selectedAITargets = ["ChatGPT"];
 
         // Event Listener Kementerian
@@ -497,6 +521,49 @@
                     selectedMinistry = ministry;
                     selectedTopics = [ministryTopics[ministry][0].name];
                     document.getElementById("customTopic").value = "";
+                    renderGradeOptions();
+                    renderAll();
+                }
+            });
+        });
+
+        // Function Render Opsi Kelas Dinamis
+        function renderGradeOptions() {
+            const gradeSelect = document.getElementById("gradeLevelInput");
+            if (!gradeSelect) return;
+            gradeSelect.innerHTML = "";
+
+            if (selectedMinistry === "TK Particular") {
+                gradeSelect.innerHTML = `
+                    <option value="TK A (Usia 4-5 Tahun)">TK A (Usia 4-5 Tahun)</option>
+                    <option value="TK B (Usia 5-6 Tahun)" selected>TK B (Usia 5-6 Tahun)</option>
+                `;
+            } else {
+                gradeSelect.innerHTML = `
+                    <option value="TK A">TK A (Usia 4-5 Tahun)</option>
+                    <option value="TK B">TK B (Usia 5-6 Tahun)</option>
+                    <option value="SD Kelas 1">SD Kelas 1</option>
+                    <option value="SD Kelas 2">SD Kelas 2</option>
+                    <option value="SD Kelas 3" selected>SD Kelas 3</option>
+                    <option value="SD Kelas 4">SD Kelas 4</option>
+                    <option value="SD Kelas 5">SD Kelas 5</option>
+                    <option value="SD Kelas 6">SD Kelas 6</option>
+                    <option value="SMP Kelas 7">SMP Kelas 7</option>
+                    <option value="SMP Kelas 8">SMP Kelas 8</option>
+                    <option value="SMP Kelas 9">SMP Kelas 9</option>
+                    <option value="SMA Kelas 10">SMA Kelas 10</option>
+                    <option value="SMA Kelas 11">SMA Kelas 11</option>
+                    <option value="SMA Kelas 12">SMA Kelas 12</option>
+                `;
+            }
+        }
+
+        // Event Listener Musik Pengiring
+        document.querySelectorAll("#musicOptionContainer .card-option").forEach((card) => {
+            card.addEventListener("click", () => {
+                const music = card.getAttribute("data-music");
+                if (music) {
+                    selectedMusic = music;
                     renderAll();
                 }
             });
@@ -646,13 +713,13 @@
                 renderAll();
             });
 
-            // LOGIKA DINAMIS: CEK APABILAH ELEMEN LEADERBOARD DICENTANG
+            // LOGIKA DINAMIS: CEK APABILA ELEMEN LEADERBOARD DICENTANG
             const lbBox = document.getElementById("leaderboardOptionBox");
             if (lbBox) {
                 if (selectedFeatures.includes("Peringkat / Leaderboard Kelas")) {
-                    lbBox.style.display = "block";
+                    lbBox.classList.remove("hidden");
                 } else {
-                    lbBox.style.display = "none";
+                    lbBox.classList.add("hidden");
                 }
             }
 
@@ -662,6 +729,15 @@
                     card.classList.add("active", "border-rose-400");
                 } else {
                     card.classList.remove("active", "border-rose-400");
+                }
+            });
+
+            document.querySelectorAll("#musicOptionContainer .card-option").forEach((card) => {
+                const mus = card.getAttribute("data-music");
+                if (mus === selectedMusic) {
+                    card.classList.add("active");
+                } else {
+                    card.classList.remove("active");
                 }
             });
 
@@ -708,7 +784,7 @@
             });
         });
 
-        // Generator Prompt AI (Tanpa File Logo Lokal & Leaderboard Opsional)
+        // Generator Prompt AI dengan Spesifikasi Kategori TK & Visual Style Kuat
         function buildPrompt() {
             const customTopicInput = document.getElementById("customTopic");
             const topicValue = customTopicInput ? customTopicInput.value.trim() : "";
@@ -729,11 +805,14 @@
             const extraNote = (extraElem && extraElem.value.trim()) ? extraElem.value.trim() : "Tampilan ramah anak, responsif, dan interaktif.";
             const targetAI = selectedAITargets[0] || "ChatGPT";
 
-            // REVISI 1: INSTRUKSI LOGO HEADER VECTOR/SVG TANPA NAMA FILE SPESIFIK
+            // INSTRUKSI PENEGASAN TEMA GAYA VISUAL UI SECARA TEBAL & KHAS
+            let visualStyleMandateId = `Gaya Visual UI Wajib: "${selectedStyle}". Seluruh komponen kuis, kartu, container, dan tombol HARUS menerapkan style ini (Contoh jika Roblox: gunakan border tebal 3D, warna kontras tinggi, font blocky, shadow membal; Jika Pixel Art: gunakan border pixelated, font retro 8-bit; Jika Cartoon: gunakan rounded-3xl pastel ceria).`;
+            let visualStyleMandateEn = `Mandatory UI Visual Style: "${selectedStyle}". All quiz components, cards, containers, and buttons MUST strictly follow this style (e.g., if Roblox: use thick 3D borders, high contrast colors, blocky fonts, bouncy shadows; if Pixel Art: pixelated borders and 8-bit fonts).`;
+
             const logoInstructionEn = `Create a clean, playful SVG vector header logo featuring a cute smiling printer mascot ("Edu-DoodlePrint") and brand title.`;
             const logoInstructionId = `Buatkan logo header vektor/SVG interaktif bertema maskot printer senyum ceria ("Edu-DoodlePrint") yang rapi dan menarik.`;
 
-            // REVISI 2: LOGIKA LEADERBOARD OPSIONAL (Hanya dibuat jika fitur Leaderboard dicentang)
+            // LOGIKA LEADERBOARD OPSIONAL
             let lbInstructionEn = "";
             let lbInstructionId = "";
             const isLeaderboardEnabled = selectedFeatures.includes("Peringkat / Leaderboard Kelas");
@@ -746,6 +825,14 @@
                     lbInstructionEn = `- LOCAL LEADERBOARD SYNC: Use browser LocalStorage to store scores on the same device.`;
                     lbInstructionId = `- SINKRONISASI LEADERBOARD LOKAL: Gunakan LocalStorage browser untuk menyimpan skor pada perangkat yang sama.`;
                 }
+            }
+
+            // KONTROL KHUSUS ANAK TK
+            let tkCurriculumRuleId = "";
+            let tkCurriculumRuleEn = "";
+            if (selectedMinistry === "TK Particular") {
+                tkCurriculumRuleId = `⚠️ KHUSUS KURIKULUM PAUD/TK (${gradeLevel}): Soal WAJIB sangat sederhana, ramah anak usia dini, menggunakan ikon/visual/emotikon yang jelas, pilihan jawaban singkat (maksimal 3 opsi), dan menggunakan instruksi yang mudah dipahami anak TK (BUKAN SOAL TEKS TINGKAT SD).`;
+                tkCurriculumRuleEn = `⚠️ KINDERGARTEN / PAUD SPECIAL RULE (${gradeLevel}): Questions MUST be super simple, toddler-friendly, heavy on emojis/icons/visuals, short options (max 3 choices), and clear instructions suitable for 4-6 year olds (DO NOT USE ELEMENTARY SCHOOL TEXT QUESTIONS).`;
             }
 
             // LOGIKA BAHASA OUTPUT PROMPT (POINT 5 = ENGLISH)
@@ -778,6 +865,7 @@ Target AI Builder: ${targetAI}
 In-Game Target Language: ${selectedLanguage}
 
 ${gameLangNoteEn}
+${tkCurriculumRuleEn}
 
 1. MAIN GAME SPECIFICATIONS
 - Game Mechanics: ${selectedGameTypes.join(", ")}
@@ -790,11 +878,11 @@ ${gameLangNoteEn}
 - Include a "Student Name" input field and a prominent "Start Game" button.
 - The entered student name must be recorded and used to greet the student and display scores.
 
-3. BACKGROUND THEME & VISUAL STYLE
+3. BACKGROUND THEME, VISUAL STYLE & MUSIC
 - Game Logo Header: ${logoInstructionEn}
 - Background Theme: ${finalBgTheme} (Must be animated / moving interactive elements)
-- Visual UI Style: ${selectedStyle}
-- Mandatory UI Design: Use 'Fredoka' font, cheerful pastel/bright colors, rounded-3xl corners, shadow effects, bouncy animated buttons (hover:scale-105 active:scale-95), and celebration particle effects upon correct answers.
+- ${visualStyleMandateEn}
+- Background Music (BGM): ${selectedMusic}. Implement using Web Audio API synth tones or gentle looping ambient sound that does NOT disrupt concentration.
 
 4. LEARNING OBJECTIVES & GAME FEATURES
 - Learning Objectives: ${selectedBloom.join(", ")}
@@ -840,6 +928,7 @@ Target AI Builder: ${targetAI}
 Bahasa Pengantar Game: ${selectedLanguage}
 
 ${gameLangNoteId}
+${tkCurriculumRuleId}
 
 1. SPESIFIKASI UTAMA PERMAINAN
 - Jenis Game: ${selectedGameTypes.join(", ")}
@@ -852,11 +941,11 @@ ${gameLangNoteId}
 - Terdapat Form Input "Masukkan Nama Siswa" dan Tombol "Mulai Game" (Start Game) yang menonjol dan ceria.
 - Nama siswa yang diinput wajib dicatat dan digunakan untuk menyapa siswa serta menampilkan skor.
 
-3. TEMA BACKGROUND & VISUAL INTERAKTIF
+3. TEMA BACKGROUND, GAYA VISUAL & MUSIK
 - Logo Header Game: ${logoInstructionId}
 - Tema Background Game: ${finalBgTheme} (Wajib Dibuat Animatif / Interaktif Bergerak)
-- Gaya Visual UI: ${selectedStyle}
-- Desain UI Wajib: Gunakan font 'Fredoka', warna ceria pastel/bright, sudut rounded-3xl, efek bayangan, tombol animasi membal (hover:scale-105 active:scale-95), serta efek selebrasi jawaban benar.
+- ${visualStyleMandateId}
+- Musik Pengiring (BGM): ${selectedMusic}. Gunakan alunan nada Web Audio API Synth yang lembut & santai agar siswa tetap fokus tanpa terganggu.
 
 4. TUJUAN PEMBELAJARAN & FITUR ELEMEN
 - Tujuan Pembelajaran: ${selectedBloom.join(", ")}
@@ -920,7 +1009,8 @@ Buatkan struktur kode HTML, CSS, dan JavaScript interaktif lengkap (Single File 
             };
         }
 
-        // Render Awal
+        // Render Awal & Inisialisasi Opsi Kelas
+        renderGradeOptions();
         renderAll();
     </script>
 </body>
