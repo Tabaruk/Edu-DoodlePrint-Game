@@ -250,11 +250,11 @@
             </div>
         </section>
 
-        <!-- POINT 4: Tema Background, Visual & Mode Leaderboard -->
+        <!-- POINT 4: Tema Background, Visual & Elemen Permainan -->
         <section id="point-4" class="bg-white p-6 rounded-3xl shadow-sm border-2 border-slate-100">
             <h2 class="text-lg font-fredoka font-bold text-slate-900 flex items-center gap-2 mb-4">
                 <span class="w-8 h-8 bg-sky-100 text-sky-600 rounded-xl flex items-center justify-center text-sm font-bold">4</span>
-                Tema Background, Visual & Mode Leaderboard
+                Tema Background, Visual & Elemen Permainan
             </h2>
 
             <div class="mb-5">
@@ -265,12 +265,27 @@
                 <input type="text" id="customBgTheme" placeholder="Ketik tema background kustom (Misal: Pemandangan Sawah, Kota Futuristik)" class="w-full px-4 py-2.5 text-xs rounded-2xl border-2 border-slate-200 focus:outline-none focus:border-sky-500">
             </div>
 
-            <div class="mb-5 p-4 bg-amber-50/70 rounded-2xl border-2 border-amber-200">
-                <label class="block text-xs font-bold text-amber-900 uppercase tracking-wider mb-2">
-                    🏆 Mode Papan Peringkat / Leaderboard Kelas (Sinkronisasi Google Sheets Guru)
+            <div class="mb-5">
+                <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">
+                    Gaya Visual UI Game (Termasuk Roblox & Mario Bros)
+                </label>
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-3" id="visualStyleContainer"></div>
+            </div>
+
+            <div class="mb-5">
+                <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">
+                    Fitur & Elemen Permainan (Centang untuk Mengaktifkan)
+                </label>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-2" id="featureContainer"></div>
+            </div>
+
+            <!-- OPSI LEADERBOARD DIBUAT DEDICATED DI BAWAH FITUR & OPSIONAL -->
+            <div id="leaderboardOptionBox" class="p-4 bg-amber-50/70 rounded-2xl border-2 border-amber-200 transition-all duration-300">
+                <label class="block text-xs font-bold text-amber-900 uppercase tracking-wider mb-1">
+                    🏆 Opsi Mode Papan Peringkat / Leaderboard Kelas
                 </label>
                 <p class="text-[11px] text-amber-800 mb-3">
-                    Pilih bagaimana skor siswa direkap dan digabungkan secara online ke Google Sheets guru.
+                    Fitur papan peringkat aktif! Pilih metode integrasi rekap skor yang Anda inginkan:
                 </p>
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3" id="leaderboardModeContainer">
                     <div class="card-option active p-3 rounded-2xl border-2 border-amber-300 text-center text-xs font-bold flex items-center justify-center gap-2 bg-white" data-lb-mode="Online Google Sheets (Database Rekap Nilai Guru via Apps Script)">
@@ -280,20 +295,6 @@
                         <span>💻</span> Lokal (Satu Perangkat Saja)
                     </div>
                 </div>
-            </div>
-
-            <div class="mb-5">
-                <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">
-                    Gaya Visual UI Game (Termasuk Roblox & Mario Bros)
-                </label>
-                <div class="grid grid-cols-2 md:grid-cols-3 gap-3" id="visualStyleContainer"></div>
-            </div>
-
-            <div>
-                <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">
-                    Fitur & Elemen Permainan
-                </label>
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-2" id="featureContainer"></div>
             </div>
         </section>
 
@@ -645,6 +646,16 @@
                 renderAll();
             });
 
+            // LOGIKA DINAMIS: CEK APABILAH ELEMEN LEADERBOARD DICENTANG
+            const lbBox = document.getElementById("leaderboardOptionBox");
+            if (lbBox) {
+                if (selectedFeatures.includes("Peringkat / Leaderboard Kelas")) {
+                    lbBox.style.display = "block";
+                } else {
+                    lbBox.style.display = "none";
+                }
+            }
+
             document.querySelectorAll("#ministryContainer .card-option").forEach((card) => {
                 const min = card.getAttribute("data-ministry");
                 if (min === selectedMinistry) {
@@ -697,7 +708,7 @@
             });
         });
 
-        // Generator Prompt AI dengan DUA DUKUNGAN BAHASA (Prompt Lang vs Game Lang)
+        // Generator Prompt AI (Tanpa File Logo Lokal & Leaderboard Opsional)
         function buildPrompt() {
             const customTopicInput = document.getElementById("customTopic");
             const topicValue = customTopicInput ? customTopicInput.value.trim() : "";
@@ -717,6 +728,25 @@
             const brand = (brandElem && brandElem.value.trim()) ? brandElem.value.trim() : "Edu-DoodlePrint";
             const extraNote = (extraElem && extraElem.value.trim()) ? extraElem.value.trim() : "Tampilan ramah anak, responsif, dan interaktif.";
             const targetAI = selectedAITargets[0] || "ChatGPT";
+
+            // REVISI 1: INSTRUKSI LOGO HEADER VECTOR/SVG TANPA NAMA FILE SPESIFIK
+            const logoInstructionEn = `Create a clean, playful SVG vector header logo featuring a cute smiling printer mascot ("Edu-DoodlePrint") and brand title.`;
+            const logoInstructionId = `Buatkan logo header vektor/SVG interaktif bertema maskot printer senyum ceria ("Edu-DoodlePrint") yang rapi dan menarik.`;
+
+            // REVISI 2: LOGIKA LEADERBOARD OPSIONAL (Hanya dibuat jika fitur Leaderboard dicentang)
+            let lbInstructionEn = "";
+            let lbInstructionId = "";
+            const isLeaderboardEnabled = selectedFeatures.includes("Peringkat / Leaderboard Kelas");
+
+            if (isLeaderboardEnabled) {
+                if (selectedLeaderboardMode.includes("Online Google Sheets")) {
+                    lbInstructionEn = `- GOOGLE SHEETS SYNC (TEACHER GRADEBOOK): Integrate Google Apps Script Web App. Provide a Settings form for teachers to enter their "Google Apps Script Web App URL". Automatically submit student names and scores to teacher's Google Sheet in real-time upon completion.`;
+                    lbInstructionId = `- SINKRONISASI GOOGLE SHEETS (REKAP NILAI GURU): Gunakan integrasi Google Apps Script Web App di dalam game. Sediakan form pengaturan (Settings) bagi guru untuk memasukkan "Google Apps Script Web App URL" milik spreadsheet mereka. Setiap kali siswa menyelesaikannya, data nama dan skor terkirim otomatis ke Google Sheet milik guru secara real-time.`;
+                } else {
+                    lbInstructionEn = `- LOCAL LEADERBOARD SYNC: Use browser LocalStorage to store scores on the same device.`;
+                    lbInstructionId = `- SINKRONISASI LEADERBOARD LOKAL: Gunakan LocalStorage browser untuk menyimpan skor pada perangkat yang sama.`;
+                }
+            }
 
             // LOGIKA BAHASA OUTPUT PROMPT (POINT 5 = ENGLISH)
             if (selectedPromptLanguage === "English") {
@@ -740,10 +770,6 @@
                     gameLangNoteEn = `⚠️ MANDATORY IN-GAME LANGUAGE: The entire game interface and quiz questions MUST BE WRITTEN IN BAHASA INDONESIA.`;
                 }
 
-                let lbInstructionEn = selectedLeaderboardMode.includes("Online Google Sheets") 
-                    ? `- GOOGLE SHEETS SYNC (TEACHER GRADEBOOK): Integrate Google Apps Script Web App. Provide a Settings form for teachers to enter their "Google Apps Script Web App URL". Automatically submit student names and scores to teacher's Google Sheet in real-time upon completion.`
-                    : `- LOCAL LEADERBOARD SYNC: Use browser LocalStorage to store scores on the same device.`;
-
                 return `${aiPersonaHeaderEn}
 
 INTERACTIVE EDUCATIONAL GAME & QUIZ SPECIFICATIONS (${brand})
@@ -762,10 +788,10 @@ ${gameLangNoteEn}
 2. START SCREEN & USER ONBOARDING
 - Landing/Start Screen: The game MUST feature a modern playful start screen (similar to Wayground / Quizizz / Kahoot).
 - Include a "Student Name" input field and a prominent "Start Game" button.
-- The entered student name must be recorded and used to greet the student and display scores on the class leaderboard.
+- The entered student name must be recorded and used to greet the student and display scores.
 
 3. BACKGROUND THEME & VISUAL STYLE
-- Game Logo: Consistently use Edu-DoodlePrint default logo (1000538651.jpg) in the header.
+- Game Logo Header: ${logoInstructionEn}
 - Background Theme: ${finalBgTheme} (Must be animated / moving interactive elements)
 - Visual UI Style: ${selectedStyle}
 - Mandatory UI Design: Use 'Fredoka' font, cheerful pastel/bright colors, rounded-3xl corners, shadow effects, bouncy animated buttons (hover:scale-105 active:scale-95), and celebration particle effects upon correct answers.
@@ -779,7 +805,7 @@ ${lbInstructionEn}
 5. MANDATORY GAMEPLAY & REPLAYABILITY REQUIREMENTS:
 - DYNAMIC BACKGROUND: The game background must feel alive (e.g., animated clouds, stars, or underwater fish matching "${finalBgTheme}").
 - "PLAY AGAIN" (NEW QUESTIONS): When clicking "Play Again", the system MUST shuffle and present a NEW SET of questions rather than repeating the same ones.
-- EVALUATION & LEADERBOARD: Provide score tracking, timers, celebratory feedback animations, and a class leaderboard connected to the database.
+- EVALUATION SYSTEM: Provide score tracking, timers, celebratory feedback animations, and score summary at the end.
 
 DEVELOPMENT INSTRUCTION:
 Generate a complete, single-file standalone web application (HTML, CSS, JavaScript) ready to run directly in any web browser.`;
@@ -806,10 +832,6 @@ Generate a complete, single-file standalone web application (HTML, CSS, JavaScri
                 gameLangNoteId = `⚠️ BAHASA PENGANTAR GAME WAJIB: Seluruh antarmuka game, teks soal kuis, pilihan jawaban, tombol, dan petunjuk WAJIB MENGGUNAKAN BAHASA INDONESIA.`;
             }
 
-            let lbInstructionId = selectedLeaderboardMode.includes("Online Google Sheets") 
-                ? `- SINKRONISASI GOOGLE SHEETS (REKAP NILAI GURU): Gunakan integrasi Google Apps Script Web App di dalam game. Sediakan form pengaturan (Settings) bagi guru untuk memasukkan "Google Apps Script Web App URL" milik spreadsheet mereka. Setiap kali siswa menyelesaikannya, data nama dan skor terkirim otomatis ke Google Sheet milik guru secara real-time.`
-                : `- SINKRONISASI LEADERBOARD LOKAL: Gunakan LocalStorage browser untuk menyimpan skor pada perangkat yang sama.`;
-
             return `${aiPersonaHeaderId}
 
 SPESIFIKASI GAME & KUIS EDUKASI INTERAKTIF (${brand})
@@ -828,10 +850,10 @@ ${gameLangNoteId}
 2. TAMPILAN AWAL GAME (START SCREEN)
 - Tampilan Pembuka (Start Screen): Game Wajib memiliki layar awal interaktif bergaya platform modern & ceria (seperti Wayground / Quizizz / Kahoot).
 - Terdapat Form Input "Masukkan Nama Siswa" dan Tombol "Mulai Game" (Start Game) yang menonjol dan ceria.
-- Nama siswa yang diinput wajib dicatat dan digunakan untuk menyapa siswa serta menampilkan skor pada papan peringkat/leaderboard.
+- Nama siswa yang diinput wajib dicatat dan digunakan untuk menyapa siswa serta menampilkan skor.
 
 3. TEMA BACKGROUND & VISUAL INTERAKTIF
-- Logo Game: Gunakan logo default Edu-DoodlePrint (1000538651.jpg) di bagian header game secara konsisten.
+- Logo Header Game: ${logoInstructionId}
 - Tema Background Game: ${finalBgTheme} (Wajib Dibuat Animatif / Interaktif Bergerak)
 - Gaya Visual UI: ${selectedStyle}
 - Desain UI Wajib: Gunakan font 'Fredoka', warna ceria pastel/bright, sudut rounded-3xl, efek bayangan, tombol animasi membal (hover:scale-105 active:scale-95), serta efek selebrasi jawaban benar.
@@ -845,7 +867,7 @@ ${lbInstructionId}
 5. SYARAT WAJIB GAMEPLAY & KUALITAS REPLAYABILITY:
 - BACKGROUND DINAMIS: Latar belakang game wajib hidup (contoh: awan/bintang/ikan bergerak sesuai tema "${finalBgTheme}").
 - TOMBOL "MAIN LAGI" (SOAL BARU): Ketika tombol "Main Lagi" diklik, sistem WAJIB mengacak dan menampilkan KUMPULAN SOAL BARU, bukan soal yang sama.
-- EVALUASI & LEADERBOARD: Menyediakan pencatatan skor, waktu, animasi selebrasi jawaban, serta tabel peringkat skor kelas yang terhubung ke database.
+- EVALUASI SISTEM: Menyediakan pencatatan skor, waktu, animasi selebrasi jawaban, serta rekap skor akhir.
 
 INSTRUKSI PENGEMBANGAN:
 Buatkan struktur kode HTML, CSS, dan JavaScript interaktif lengkap (Single File Standalone Web App) yang siap langsung dijalankan di browser.`;
