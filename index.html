@@ -114,10 +114,10 @@
                 🎮 1. Jenis Game
             </a>
             <a href="#point-2" class="px-3 py-2 rounded-xl font-bold text-slate-700 hover:bg-sky-100 hover:text-sky-700 transition flex items-center gap-1.5 whitespace-nowrap">
-                📚 2. Materi Pembelajaran
+                📚 2. Kementerian & Materi
             </a>
             <a href="#point-3" class="px-3 py-2 rounded-xl font-bold text-slate-700 hover:bg-sky-100 hover:text-sky-700 transition flex items-center gap-1.5 whitespace-nowrap">
-                🎓 3. Jumlah Soal & Umur
+                🎓 3. Kelas & Soal
             </a>
             <a href="#point-4" class="px-3 py-2 rounded-xl font-bold text-slate-700 hover:bg-sky-100 hover:text-sky-700 transition flex items-center gap-1.5 whitespace-nowrap">
                 🎨 4. Tema & Leaderboard
@@ -168,16 +168,31 @@
             </div>
         </section>
 
-        <!-- POINT 2: Materi & Tema Pembelajaran -->
+        <!-- POINT 2: Kementerian & Materi Pembelajaran (Dinamis) -->
         <section id="point-2" class="bg-white p-6 rounded-3xl shadow-sm border-2 border-slate-100">
             <h2 class="text-lg font-fredoka font-bold text-slate-900 flex items-center gap-2 mb-4">
                 <span class="w-8 h-8 bg-sky-100 text-sky-600 rounded-xl flex items-center justify-center text-sm font-bold">2</span>
-                Materi & Tema Pembelajaran
+                Kementerian & Materi Pembelajaran
             </h2>
 
-            <div class="mb-4">
+            <!-- Pilihan Kementerian -->
+            <div class="mb-5">
                 <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">
-                    Pilih Topik Populer (Akan nonaktif jika mengetik di bawah)
+                    Pilih Instansi / Kurikulum Kementerian
+                </label>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3" id="ministryContainer">
+                    <div class="card-option active p-3 rounded-2xl border-2 border-slate-200 text-center text-xs font-bold flex items-center justify-center gap-2" data-ministry="Kemendikdasmen">
+                        <span>🏫</span> Kemendikdasmen (Umum)
+                    </div>
+                    <div class="card-option p-3 rounded-2xl border-2 border-slate-200 text-center text-xs font-bold flex items-center justify-center gap-2" data-ministry="Kemenag">
+                        <span>🕌</span> Kemenag (Madrasah / Keagamaan)
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-4">
+                <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2" id="topicLabel">
+                    Pilih Topik Populer (Menyesuaikan Kementerian)
                 </label>
                 <div class="flex flex-wrap gap-2" id="topicContainer"></div>
             </div>
@@ -186,37 +201,45 @@
                 <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1" for="customTopic">
                     Atau Ketik Materi / Tema Spesifik Anda
                 </label>
-                <input type="text" id="customTopic" placeholder="Contoh: Tata Surya, Majas & Gaya Bahasa, Operasi Hitung Perkalian" class="w-full px-4 py-3 text-sm rounded-2xl border-2 border-slate-200 focus:outline-none focus:border-sky-500 transition">
+                <input type="text" id="customTopic" placeholder="Contoh: Tata Surya, Fikih Shalat Berjamaah, Majas Gaya Bahasa" class="w-full px-4 py-3 text-sm rounded-2xl border-2 border-slate-200 focus:outline-none focus:border-sky-500 transition">
             </div>
         </section>
 
-        <!-- POINT 3: Jumlah Soal & Target Usia -->
+        <!-- POINT 3: Kelas & Jumlah Soal -->
         <section id="point-3" class="bg-white p-6 rounded-3xl shadow-sm border-2 border-slate-100">
             <h2 class="text-lg font-fredoka font-bold text-slate-900 flex items-center gap-2 mb-4">
                 <span class="w-8 h-8 bg-sky-100 text-sky-600 rounded-xl flex items-center justify-center text-sm font-bold">3</span>
-                Jumlah Soal & Target Usia / Umur Peserta Didik
+                Jenjang Kelas & Jumlah Soal
             </h2>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-5">
                 <div>
-                    <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1" for="questionCountInput">
-                        Jumlah Soal (Bebas)
+                    <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1" for="gradeLevelInput">
+                        Pilih Jenjang Kelas Peserta Didik
                     </label>
-                    <input type="text" id="questionCountInput" value="10 Soal" placeholder="Contoh: 12 Soal, 15 Pertanyaan" class="w-full px-4 py-3 text-sm rounded-2xl border-2 border-sky-300 focus:outline-none focus:border-sky-500 font-bold text-sky-600 bg-sky-50/50">
+                    <select id="gradeLevelInput" class="w-full px-4 py-3 text-sm rounded-2xl border-2 border-sky-300 focus:outline-none focus:border-sky-500 bg-sky-50/50 font-bold text-sky-700">
+                        <option value="TK A">TK A (Usia 4-5 Tahun)</option>
+                        <option value="TK B">TK B (Usia 5-6 Tahun)</option>
+                        <option value="SD Kelas 1">SD Kelas 1</option>
+                        <option value="SD Kelas 2">SD Kelas 2</option>
+                        <option value="SD Kelas 3" selected>SD Kelas 3</option>
+                        <option value="SD Kelas 4">SD Kelas 4</option>
+                        <option value="SD Kelas 5">SD Kelas 5</option>
+                        <option value="SD Kelas 6">SD Kelas 6</option>
+                        <option value="SMP Kelas 7">SMP Kelas 7</option>
+                        <option value="SMP Kelas 8">SMP Kelas 8</option>
+                        <option value="SMP Kelas 9">SMP Kelas 9</option>
+                        <option value="SMA Kelas 10">SMA Kelas 10</option>
+                        <option value="SMA Kelas 11">SMA Kelas 11</option>
+                        <option value="SMA Kelas 12">SMA Kelas 12</option>
+                    </select>
                 </div>
 
                 <div>
-                    <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1" for="targetAgeInput">
-                        Target Usia / Umur Peserta Didik
+                    <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1" for="questionCountInput">
+                        Jumlah Soal (Bebas)
                     </label>
-                    <select id="targetAgeInput" class="w-full px-4 py-3 text-sm rounded-2xl border-2 border-slate-200 focus:outline-none focus:border-sky-500 bg-white font-bold text-slate-700">
-                        <option value="3 - 5 Tahun (PAUD/TK)">3 - 5 Tahun (PAUD / TK)</option>
-                        <option value="6 - 8 Tahun (Anak-anak)" selected>6 - 8 Tahun (Anak-Anak)</option>
-                        <option value="9 - 12 Tahun (SD Akhir)">9 - 12 Tahun (SD Akhir)</option>
-                        <option value="13 - 15 Tahun (Remaja Awal)">13 - 15 Tahun (Remaja Awal)</option>
-                        <option value="16 - 18 Tahun (Remaja)">16 - 18 Tahun (Remaja)</option>
-                        <option value="18+ Tahun (Dewasa / Umum)">18+ Tahun (Dewasa / Umum)</option>
-                    </select>
+                    <input type="text" id="questionCountInput" value="10 Soal" placeholder="Contoh: 12 Soal, 15 Pertanyaan" class="w-full px-4 py-3 text-sm rounded-2xl border-2 border-slate-200 focus:outline-none focus:border-sky-500 font-bold text-slate-700 bg-white">
                 </div>
             </div>
 
@@ -245,14 +268,14 @@
 
             <div class="mb-5 p-4 bg-amber-50/70 rounded-2xl border-2 border-amber-200">
                 <label class="block text-xs font-bold text-amber-900 uppercase tracking-wider mb-2">
-                    🏆 Mode Papan Peringkat / Leaderboard Kelas (Sinkronisasi Skor)
+                    🏆 Mode Papan Peringkat / Leaderboard Kelas (Sinkronisasi Google Sheets Guru)
                 </label>
                 <p class="text-[11px] text-amber-800 mb-3">
-                    Pilih bagaimana skor antar siswa (misal Asep dan Ujang) digabungkan dalam satu papan peringkat.
+                    Pilih bagaimana skor siswa direkap dan digabungkan secara online ke Google Sheets guru.
                 </p>
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3" id="leaderboardModeContainer">
-                    <div class="card-option active p-3 rounded-2xl border-2 border-amber-300 text-center text-xs font-bold flex items-center justify-center gap-2 bg-white" data-lb-mode="Online Real-Time (Cloud / Firebase / Lintas Perangkat)">
-                        <span>☁️</span> Online Real-Time (Lintas Perangkat)
+                    <div class="card-option active p-3 rounded-2xl border-2 border-amber-300 text-center text-xs font-bold flex items-center justify-center gap-2 bg-white" data-lb-mode="Online Google Sheets (Database Rekap Nilai Guru via Apps Script)">
+                        <span>📊</span> Online Google Sheets (Rekap Guru)
                     </div>
                     <div class="card-option p-3 rounded-2xl border-2 border-slate-200 text-center text-xs font-bold flex items-center justify-center gap-2 bg-white" data-lb-mode="Lokal (Satu Perangkat / Browser Saja)">
                         <span>💻</span> Lokal (Satu Perangkat Saja)
@@ -284,7 +307,7 @@
 
             <div class="mb-5">
                 <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">
-                    Target AI Builder (Termasuk ChatGPT)
+                    Target AI Builder (Prompt akan menyesuaikan platform yang dipilih)
                 </label>
                 <div class="flex flex-wrap gap-2" id="aiTargetContainer"></div>
             </div>
@@ -323,7 +346,7 @@
 
     <!-- Footer Versi Aplikasi -->
     <footer class="mt-12 text-center text-xs font-semibold text-slate-400 py-4">
-        Edu-DoodlePrint Creator &bull; Versi 1.1 | 07.10.2026
+        Edu-DoodlePrint Creator &bull; Versi 1.3 | 13.10.2026
     </footer>
 
     <!-- Floating Action Bar Bottom -->
@@ -393,17 +416,27 @@
             { name: "Papan Tulis Sekolah", icon: "fa-solid fa-chalkboard-user" }
         ];
 
-        const popularTopics = [
-            { name: "Ekosistem & Rantai Makanan", icon: "fa-solid fa-leaf" },
-            { name: "Tata Surya & Planet", icon: "fa-solid fa-earth-americas" },
-            { name: "Anatomi Tubuh & Indra", icon: "fa-solid fa-child" },
-            { name: "Siklus Air & Hujan", icon: "fa-solid fa-cloud-showers-heavy" },
-            { name: "Garuda Pancasila & PPKn", icon: "fa-solid fa-flag" },
-            { name: "Majas & Gaya Bahasa", icon: "fa-solid fa-book-open" },
-            { name: "Sinonim & Antonim Kata", icon: "fa-solid fa-language" },
-            { name: "Eksperimen Biologi", icon: "fa-solid fa-flask" },
-            { name: "Operasi Matematika", icon: "fa-solid fa-calculator" }
-        ];
+        // Topik Dinamis Berdasarkan Kementerian
+        const ministryTopics = {
+            "Kemendikdasmen": [
+                { name: "Matematika", icon: "fa-solid fa-calculator" },
+                { name: "Ilmu Pengetahuan Alam (IPA)", icon: "fa-solid fa-flask" },
+                { name: "Ilmu Pengetahuan Sosial (IPS)", icon: "fa-solid fa-earth-americas" },
+                { name: "Bahasa Indonesia", icon: "fa-solid fa-book-open" },
+                { name: "Pendidikan Pancasila (PPKn)", icon: "fa-solid fa-flag" },
+                { name: "Bahasa Inggris", icon: "fa-solid fa-language" },
+                { name: "Seni Budaya & Kreatif", icon: "fa-solid fa-palette" },
+                { name: "Informatika / TIK", icon: "fa-solid fa-laptop-code" }
+            ],
+            "Kemenag": [
+                { name: "Al-Qur'an Hadis", icon: "fa-solid fa-book-quran" },
+                { name: "Akidah Akhlak", icon: "fa-solid fa-hands-praying" },
+                { name: "Fikih", icon: "fa-solid fa-scale-balanced" },
+                { name: "Sejarah Kebudayaan Islam (SKI)", icon: "fa-solid fa-mosque" },
+                { name: "Bahasa Arab", icon: "fa-solid fa-comments" },
+                { name: "Hadis & Tarikh", icon: "fa-solid fa-scroll" }
+            ]
+        };
 
         const bloomLevels = [
             { name: "Mengingat", icon: "fa-solid fa-brain" },
@@ -415,7 +448,6 @@
             { name: "Numerasi", icon: "fa-solid fa-calculator" }
         ];
 
-        // Penambahan Gaya Visual Roblox & Mario Bros
         const visualStyles = [
             { name: "Roblox 3D Block Style", icon: "fa-solid fa-cube" },
             { name: "Mario Bros Retro Arcade", icon: "fa-solid fa-gamepad" },
@@ -439,10 +471,9 @@
 
         const aiTargets = [
             { name: "ChatGPT", icon: "fa-solid fa-comments" },
-            { name: "Google AI Studio", icon: "fa-solid fa-robot" },
-            { name: "Gemini", icon: "fa-solid fa-sparkles" },
-            { name: "Lovable", icon: "fa-solid fa-heart" },
+            { name: "Gemini / AI Studio", icon: "fa-solid fa-sparkles" },
             { name: "Claude", icon: "fa-solid fa-brain" },
+            { name: "Lovable", icon: "fa-solid fa-heart" },
             { name: "Canva", icon: "fa-solid fa-palette" }
         ];
 
@@ -450,20 +481,33 @@
         let selectedGameTypes = ["Drag & Drop"];
         let selectedLanguage = "Bahasa Indonesia";
         let selectedPromptLanguage = "Bahasa Indonesia";
-        let selectedLeaderboardMode = "Online Real-Time (Cloud / Firebase / Lintas Perangkat)";
-        let selectedTopics = ["Ekosistem & Rantai Makanan"];
+        let selectedMinistry = "Kemendikdasmen";
+        let selectedLeaderboardMode = "Online Google Sheets (Database Rekap Nilai Guru via Apps Script)";
+        let selectedTopics = ["Matematika"];
         let selectedBgTheme = "Pemandangan Alam";
         let selectedBloom = ["Memahami", "Menerapkan"];
         let selectedStyle = "Roblox 3D Block Style";
         let selectedFeatures = ["Progressbar / Level", "Suara & efek audio", "Sistem bintang / Skor", "Peringkat / Leaderboard Kelas"];
         let selectedAITargets = ["ChatGPT"];
 
-        // Event Listener untuk Input Materi Spesifik (Mengosongkan Topik Populer jika diketik)
+        // Event Listener untuk Kementerian
+        document.querySelectorAll("#ministryContainer .card-option").forEach((card) => {
+            card.addEventListener("click", () => {
+                const ministry = card.getAttribute("data-ministry");
+                if (ministry) {
+                    selectedMinistry = ministry;
+                    selectedTopics = [ministryTopics[ministry][0].name]; // Default pilih topik pertama
+                    document.getElementById("customTopic").value = "";
+                    renderAll();
+                }
+            });
+        });
+
         const customTopicInput = document.getElementById("customTopic");
         if (customTopicInput) {
             customTopicInput.addEventListener("input", () => {
                 if (customTopicInput.value.trim().length > 0) {
-                    selectedTopics = []; // Nonaktifkan pilihan topik populer
+                    selectedTopics = [];
                     renderAll();
                 }
             });
@@ -521,7 +565,6 @@
                             selectedArray.push(name);
                         }
                     } else {
-                        // Jika mengklik topik populer, reset input custom topik
                         if (containerId === "topicContainer") {
                             const customInput = document.getElementById("customTopic");
                             if (customInput) customInput.value = "";
@@ -565,8 +608,10 @@
         }
 
         function renderAll() {
+            // Render topik berdasarkan kementerian yang dipilih
+            const currentTopics = ministryTopics[selectedMinistry];
             renderChips("gameTypeContainer", gameTypes, selectedGameTypes, true);
-            renderChips("topicContainer", popularTopics, selectedTopics, false);
+            renderChips("topicContainer", currentTopics, selectedTopics, false);
             renderChips("bloomContainer", bloomLevels, selectedBloom, true);
             renderChips("featureContainer", gameFeatures, selectedFeatures, true);
             renderChips("aiTargetContainer", aiTargets, selectedAITargets, false);
@@ -579,6 +624,16 @@
             renderCards("visualStyleContainer", visualStyles, selectedStyle, (val) => {
                 selectedStyle = val;
                 renderAll();
+            });
+
+            // Active State untuk Kementerian
+            document.querySelectorAll("#ministryContainer .card-option").forEach((card) => {
+                const min = card.getAttribute("data-ministry");
+                if (min === selectedMinistry) {
+                    card.classList.add("active", "border-rose-400");
+                } else {
+                    card.classList.remove("active", "border-rose-400");
+                }
             });
 
             document.querySelectorAll("#leaderboardModeContainer .card-option").forEach((card) => {
@@ -644,7 +699,7 @@
             });
         });
 
-        // Generator Prompt AI
+        // Generator Prompt AI yang Menyesuaikan Khas Platform AI Builder
         function buildPrompt() {
             const customTopicInput = document.getElementById("customTopic");
             const topicValue = customTopicInput ? customTopicInput.value.trim() : "";
@@ -654,99 +709,73 @@
             const bgValue = customBgInput ? customBgInput.value.trim() : "";
             const finalBgTheme = bgValue ? bgValue : selectedBgTheme;
             
-            const ageElem = document.getElementById("targetAgeInput");
+            const gradeElem = document.getElementById("gradeLevelInput");
             const qCountElem = document.getElementById("questionCountInput");
             const brandElem = document.getElementById("creatorBrand");
             const extraElem = document.getElementById("extraInstructions");
 
-            const targetAge = ageElem ? ageElem.value : "6 - 8 Tahun (Anak-Anak)";
+            const gradeLevel = gradeElem ? gradeElem.value : "SD Kelas 3";
             const qCount = (qCountElem && qCountElem.value.trim()) ? qCountElem.value.trim() : "10 Soal";
             const brand = (brandElem && brandElem.value.trim()) ? brandElem.value.trim() : "Edu-DoodlePrint";
             const extraNote = (extraElem && extraElem.value.trim()) ? extraElem.value.trim() : "Tampilan ramah anak, responsif, dan interaktif.";
+            const targetAI = selectedAITargets[0] || "ChatGPT";
 
-            let logoInstructionId = `Gunakan Logo Default Edu-DoodlePrint (1000538651.jpg) pada header game.`;
-            let logoInstructionEn = `Use Default Edu-DoodlePrint Logo (1000538651.jpg) in the game header.`;
+            // Logo Default Konsisten Edu-DoodlePrint
+            const logoInstruction = `Gunakan logo default Edu-DoodlePrint (1000538651.jpg) di bagian header game secara konsisten.`;
 
-            let lbInstructionId = "";
-            let lbInstructionEn = "";
-            if (selectedLeaderboardMode.includes("Online Real-Time")) {
-                lbInstructionId = `- SINKRONISASI LEADERBOARD ONLINE (Lintas Perangkat): Gunakan backend database cloud gratis (seperti Firebase Realtime Database atau MockAPI / SheetDB) secara otomatis di dalam kode game, sehingga skor siswa dari perangkat/tab berbeda (misal Asep dan Ujang) dapat tergabung dan tersinkronisasi secara real-time ke dalam satu papan peringkat kelas yang sama.`;
-                lbInstructionEn = `- ONLINE REAL-TIME LEADERBOARD SYNC (Cross-Device): Automatically integrate a free cloud database backend (such as Firebase Realtime Database or MockAPI / SheetDB) into the game code so that scores from different devices/tabs (e.g., Asep and Ujang) are merged and synchronized in real-time into the same class leaderboard.`;
+            let lbInstruction = "";
+            if (selectedLeaderboardMode.includes("Online Google Sheets")) {
+                lbInstruction = `- SINKRONISASI GOOGLE SHEETS (REKAP NILAI GURU): Gunakan integrasi Google Apps Script Web App di dalam game. Sediakan form pengaturan (Settings) bagi guru untuk memasukkan "Google Apps Script Web App URL" milik spreadsheet mereka. Setiap kali siswa menyelesaikannya, data nama dan skor terkirim otomatis ke Google Sheet milik guru secara real-time.`;
             } else {
-                lbInstructionId = `- SINKRONISASI LEADERBOARD LOKAL: Gunakan LocalStorage browser untuk menyimpan skor pada perangkat yang sama.`;
-                lbInstructionEn = `- LOCAL LEADERBOARD SYNC: Use browser LocalStorage to store scores on the same device.`;
+                lbInstruction = `- SINKRONISASI LEADERBOARD LOKAL: Gunakan LocalStorage browser untuk menyimpan skor pada perangkat yang sama.`;
             }
 
-            if (selectedPromptLanguage === "English") {
-                return `INTERACTIVE EDUCATIONAL GAME & QUIZ SPECIFICATION PROMPT (Edu-DoodlePrint)
-
-Target AI Builder: ${selectedAITargets.join(", ")}
-Brand / Creator: ${brand}
-Game Interface Language: ${selectedLanguage}
-
-1. MAIN GAME SPECIFICATIONS
-- Game Mechanics: ${selectedGameTypes.join(", ")}
-- Subject / Topic: ${finalTopic}
-- Target Age Group: ${targetAge}
-- Number of Questions / Challenges: ${qCount}
-
-2. START SCREEN & USER ONBOARDING
-- Landing/Start Screen: The game MUST feature a modern interactive start screen (similar to Wayground / Quizizz / Kahoot).
-- Include a "Student Name" input field and a prominent, playful "Start Game" button.
-- The entered student name must be recorded and used to greet the student and display scores on the class leaderboard.
-
-3. BACKGROUND THEME & VISUAL STYLE
-- Game Logo: ${logoInstructionEn}
-- Background Theme: ${finalBgTheme} (Must be animated / interactive moving elements)
-- UI Visual Style: ${selectedStyle}
-
-4. LEARNING OBJECTIVES & GAME FEATURES
-- Learning Objectives: ${selectedBloom.join(", ")}
-- Interactive Features: ${selectedFeatures.join(", ")}
-${lbInstructionEn}
-- Additional Notes: ${extraNote}
-
-5. MANDATORY GAMEPLAY & REPLAYABILITY REQUIREMENTS:
-- DYNAMIC BACKGROUND: The game background must feel alive (e.g., animated clouds, stars, or underwater fish matching "${finalBgTheme}").
-- "PLAY AGAIN" (NEW QUESTIONS): When the "Play Again" button is clicked, the system MUST shuffle and present a NEW SET of questions rather than repeating the same ones.
-- EVALUATION & LEADERBOARD: Provide score tracking, timers, celebratory feedback animations, and a class leaderboard ranking.
-
-DEVELOPMENT INSTRUCTION:
-Generate a complete, single-file standalone web application (HTML, CSS, JavaScript) that is ready to run directly in any web browser.`;
+            // Penyesuaian Karakteristik Prompt Berdasarkan AI Builder yang Dipilih
+            let aiPersonaHeader = "";
+            if (targetAI.includes("ChatGPT")) {
+                aiPersonaHeader = `[INSTRUKSI KHUSUS UNTUK CHATGPT]\nBertindaklah sebagai Senior Frontend Developer & Pakar Kurikulum Kurikulum ${selectedMinistry}. Buatkan struktur kodingan yang bersih, modular, kaya detail estetika, dan sangat responsif.`;
+            } else if (targetAI.includes("Gemini")) {
+                aiPersonaHeader = `[INSTRUKSI KHUSUS UNTUK GEMINI / AI STUDIO]\nBertindaklah sebagai System Architect & Educational Game Developer. Pastikan kode HTML/CSS/JS lengkap, tidak terpotong (full code), akurat secara logika kuis Kurikulum ${selectedMinistry}, dan memiliki animasi interaktif yang memukau.`;
+            } else if (targetAI.includes("Claude")) {
+                aiPersonaHeader = `[INSTRUKSI KHUSUS UNTUK CLAUDE]\nBertindaklah sebagai Expert Software Engineer. Tuliskan kode clean-code berstandar tinggi dengan komentar kode yang terstruktur elegan dan pengalaman UI/UX tingkat tinggi untuk anak-anak.`;
+            } else {
+                aiPersonaHeader = `[INSTRUKSI UMUM BUILDER]\nBuatkan aplikasi web interaktif tunggal (Single File App) berkualitas tinggi.`;
             }
 
-            return `PROMPT SPESIFIKASI GAME & KUIS EDUKASI INTERAKTIF (Edu-DoodlePrint)
+            return `${aiPersonaHeader}
 
-Target AI Builder: ${selectedAITargets.join(", ")}
-Brand / Creator: ${brand}
+SPESIFIKASI GAME & KUIS EDUKASI INTERAKTIF (${brand})
+Kurikulum / Instansi: ${selectedMinistry}
+Target AI Builder: ${targetAI}
 Bahasa Pengantar Game: ${selectedLanguage}
 
 1. SPESIFIKASI UTAMA PERMAINAN
 - Jenis Game: ${selectedGameTypes.join(", ")}
-- Topik / Materi: ${finalTopic}
-- Target Usia / Umur Peserta Didik: ${targetAge}
+- Mata Pelajaran / Topik (${selectedMinistry}): ${finalTopic}
+- Jenjang Kelas: ${gradeLevel}
 - Jumlah Soal / Tantangan: ${qCount}
 
 2. TAMPILAN AWAL GAME (START SCREEN)
-- Tampilan Pembuka (Start Screen): Game Wajib memiliki layar awal interaktif bergaya platform modern (seperti Wayground / Quizizz / Kahoot).
+- Tampilan Pembuka (Start Screen): Game Wajib memiliki layar awal interaktif bergaya platform modern & ceria (seperti Wayground / Quizizz / Kahoot).
 - Terdapat Form Input "Masukkan Nama Siswa" dan Tombol "Mulai Game" (Start Game) yang menonjol dan ceria.
 - Nama siswa yang diinput wajib dicatat dan digunakan untuk menyapa siswa serta menampilkan skor pada papan peringkat/leaderboard.
 
 3. TEMA BACKGROUND & VISUAL INTERAKTIF
-- Logo Game: ${logoInstructionId}
+- Logo Game: ${logoInstruction}
 - Tema Background Game: ${finalBgTheme} (Wajib Dibuat Animatif / Interaktif Bergerak)
 - Gaya Visual UI: ${selectedStyle}
+- Desain UI Wajib: Gunakan font 'Fredoka', warna ceria pastel/bright, sudut rounded-3xl, efek bayangan, tombol animasi membal (hover:scale-105 active:scale-95), serta efek selebrasi jawaban benar.
 
 4. TUJUAN PEMBELAJARAN & FITUR ELEMEN
 - Tujuan Pembelajaran: ${selectedBloom.join(", ")}
 - Fitur Interaktif: ${selectedFeatures.join(", ")}
-${lbInstructionId}
+${lbInstruction}
 - Catatan Tambahan: ${extraNote}
 
 5. SYARAT WAJIB GAMEPLAY & KUALITAS REPLAYABILITY:
 - BACKGROUND DINAMIS: Latar belakang game wajib hidup (contoh: awan/bintang/ikan bergerak sesuai tema "${finalBgTheme}").
 - TOMBOL "MAIN LAGI" (SOAL BARU): Ketika tombol "Main Lagi" diklik, sistem WAJIB mengacak dan menampilkan KUMPULAN SOAL BARU, bukan soal yang sama.
-- EVALUASI & LEADERBOARD: Menyediakan pencatatan skor, waktu, animasi selebrasi jawaban, serta tabel peringkat skor kelas.
+- EVALUASI & LEADERBOARD: Menyediakan pencatatan skor, waktu, animasi selebrasi jawaban, serta tabel peringkat skor kelas yang terhubung ke database.
 
 INSTRUKSI PENGEMBANGAN:
 Buatkan struktur kode HTML, CSS, dan JavaScript interaktif lengkap (Single File Standalone Web App) yang siap langsung dijalankan di browser.`;
