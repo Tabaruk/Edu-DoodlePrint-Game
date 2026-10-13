@@ -131,12 +131,12 @@
     <!-- Container Utama -->
     <main class="max-w-4xl mx-auto px-4 space-y-6">
 
-        <!-- POINT 1: Jenis Game & Bahasa -->
+        <!-- POINT 1: Jenis Game & Bahasa Game -->
         <section id="point-1" class="bg-white p-6 rounded-3xl shadow-sm border-2 border-slate-100">
             <div class="flex items-center justify-between mb-4">
                 <h2 class="text-lg font-fredoka font-bold text-slate-900 flex items-center gap-2">
                     <span class="w-8 h-8 bg-sky-100 text-sky-600 rounded-xl flex items-center justify-center text-sm font-bold">1</span>
-                    Jenis Game & Bahasa Game
+                    Jenis Game & Bahasa Pengantar Game
                 </h2>
                 <span class="text-xs bg-sky-100 text-sky-700 font-bold px-3 py-1 rounded-full">
                     Pilihan Bebas (Tanpa Batas)
@@ -152,7 +152,7 @@
 
             <div>
                 <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">
-                    Bahasa Pengantar Di Dalam Permainan
+                    Bahasa Pengantar Di Dalam Permainan (Bahasa Kuis/Soal)
                 </label>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-3" id="languageContainer">
                     <div class="card-option active p-3 rounded-2xl border-2 border-slate-200 text-center text-sm font-bold flex items-center justify-center gap-2" data-lang="Bahasa Indonesia">
@@ -168,14 +168,13 @@
             </div>
         </section>
 
-        <!-- POINT 2: Kementerian & Materi Pembelajaran (Dinamis) -->
+        <!-- POINT 2: Kementerian & Materi Pembelajaran -->
         <section id="point-2" class="bg-white p-6 rounded-3xl shadow-sm border-2 border-slate-100">
             <h2 class="text-lg font-fredoka font-bold text-slate-900 flex items-center gap-2 mb-4">
                 <span class="w-8 h-8 bg-sky-100 text-sky-600 rounded-xl flex items-center justify-center text-sm font-bold">2</span>
                 Kementerian & Materi Pembelajaran
             </h2>
 
-            <!-- Pilihan Kementerian -->
             <div class="mb-5">
                 <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">
                     Pilih Instansi / Kurikulum Kementerian
@@ -314,7 +313,7 @@
 
             <div class="mb-5 p-4 bg-sky-50/70 rounded-2xl border-2 border-sky-100">
                 <label class="block text-xs font-bold text-sky-900 uppercase tracking-wider mb-2">
-                    🌐 Bahasa Output Prompt AI (Hasil Generate)
+                    🌐 Bahasa Output Hasil Prompt AI (Bahasa Teks Prompt)
                 </label>
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3" id="promptLanguageContainer">
                     <div class="card-option active p-3 rounded-2xl border-2 border-slate-200 text-center text-xs font-bold flex items-center justify-center gap-2" data-prompt-lang="Bahasa Indonesia">
@@ -416,7 +415,6 @@
             { name: "Papan Tulis Sekolah", icon: "fa-solid fa-chalkboard-user" }
         ];
 
-        // Topik Dinamis Berdasarkan Kementerian
         const ministryTopics = {
             "Kemendikdasmen": [
                 { name: "Matematika", icon: "fa-solid fa-calculator" },
@@ -479,8 +477,8 @@
 
         // State Penyimpanan
         let selectedGameTypes = ["Drag & Drop"];
-        let selectedLanguage = "Bahasa Indonesia";
-        let selectedPromptLanguage = "Bahasa Indonesia";
+        let selectedLanguage = "Bahasa Indonesia"; // Bahasa Pengantar Game (Point 1)
+        let selectedPromptLanguage = "Bahasa Indonesia"; // Bahasa Hasil Prompt (Point 5)
         let selectedMinistry = "Kemendikdasmen";
         let selectedLeaderboardMode = "Online Google Sheets (Database Rekap Nilai Guru via Apps Script)";
         let selectedTopics = ["Matematika"];
@@ -490,14 +488,36 @@
         let selectedFeatures = ["Progressbar / Level", "Suara & efek audio", "Sistem bintang / Skor", "Peringkat / Leaderboard Kelas"];
         let selectedAITargets = ["ChatGPT"];
 
-        // Event Listener untuk Kementerian
+        // Event Listener Kementerian
         document.querySelectorAll("#ministryContainer .card-option").forEach((card) => {
             card.addEventListener("click", () => {
                 const ministry = card.getAttribute("data-ministry");
                 if (ministry) {
                     selectedMinistry = ministry;
-                    selectedTopics = [ministryTopics[ministry][0].name]; // Default pilih topik pertama
+                    selectedTopics = [ministryTopics[ministry][0].name];
                     document.getElementById("customTopic").value = "";
+                    renderAll();
+                }
+            });
+        });
+
+        // Event Listener Bahasa Pengantar Game (Point 1)
+        document.querySelectorAll("#languageContainer .card-option").forEach((card) => {
+            card.addEventListener("click", () => {
+                const lang = card.getAttribute("data-lang");
+                if (lang) {
+                    selectedLanguage = lang;
+                    renderAll();
+                }
+            });
+        });
+
+        // Event Listener Bahasa Output Prompt (Point 5)
+        document.querySelectorAll("#promptLanguageContainer .card-option").forEach((card) => {
+            card.addEventListener("click", () => {
+                const pLang = card.getAttribute("data-prompt-lang");
+                if (pLang) {
+                    selectedPromptLanguage = pLang;
                     renderAll();
                 }
             });
@@ -608,7 +628,6 @@
         }
 
         function renderAll() {
-            // Render topik berdasarkan kementerian yang dipilih
             const currentTopics = ministryTopics[selectedMinistry];
             renderChips("gameTypeContainer", gameTypes, selectedGameTypes, true);
             renderChips("topicContainer", currentTopics, selectedTopics, false);
@@ -626,7 +645,6 @@
                 renderAll();
             });
 
-            // Active State untuk Kementerian
             document.querySelectorAll("#ministryContainer .card-option").forEach((card) => {
                 const min = card.getAttribute("data-ministry");
                 if (min === selectedMinistry) {
@@ -679,27 +697,7 @@
             });
         });
 
-        document.querySelectorAll("#languageContainer .card-option").forEach((card) => {
-            card.addEventListener("click", () => {
-                const lang = card.getAttribute("data-lang");
-                if (lang) {
-                    selectedLanguage = lang;
-                    renderAll();
-                }
-            });
-        });
-
-        document.querySelectorAll("#promptLanguageContainer .card-option").forEach((card) => {
-            card.addEventListener("click", () => {
-                const pLang = card.getAttribute("data-prompt-lang");
-                if (pLang) {
-                    selectedPromptLanguage = pLang;
-                    renderAll();
-                }
-            });
-        });
-
-        // Generator Prompt AI yang Menyesuaikan Khas Platform AI Builder
+        // Generator Prompt AI dengan DUA DUKUNGAN BAHASA (Prompt Lang vs Game Lang)
         function buildPrompt() {
             const customTopicInput = document.getElementById("customTopic");
             const topicValue = customTopicInput ? customTopicInput.value.trim() : "";
@@ -720,34 +718,106 @@
             const extraNote = (extraElem && extraElem.value.trim()) ? extraElem.value.trim() : "Tampilan ramah anak, responsif, dan interaktif.";
             const targetAI = selectedAITargets[0] || "ChatGPT";
 
-            // Logo Default Konsisten Edu-DoodlePrint
-            const logoInstruction = `Gunakan logo default Edu-DoodlePrint (1000538651.jpg) di bagian header game secara konsisten.`;
+            // LOGIKA BAHASA OUTPUT PROMPT (POINT 5 = ENGLISH)
+            if (selectedPromptLanguage === "English") {
+                let aiPersonaHeaderEn = "";
+                if (targetAI.includes("ChatGPT")) {
+                    aiPersonaHeaderEn = `[SPECIAL INSTRUCTION FOR CHATGPT]\nAct as a Senior Frontend Developer & Curriculum Expert of ${selectedMinistry}. Create clean, modular, highly aesthetic, and responsive interactive web code.`;
+                } else if (targetAI.includes("Gemini")) {
+                    aiPersonaHeaderEn = `[SPECIAL INSTRUCTION FOR GEMINI / AI STUDIO]\nAct as a System Architect & Educational Game Developer. Write complete single-file code (HTML, CSS, JS) without truncation. Include Tailwind CSS CDN and Google Fonts 'Fredoka' mandatory.`;
+                } else if (targetAI.includes("Claude")) {
+                    aiPersonaHeaderEn = `[SPECIAL INSTRUCTION FOR CLAUDE]\nAct as an Expert Software Engineer. Write high-standard clean code with elegant comments and high-level UI/UX for kids.`;
+                } else {
+                    aiPersonaHeaderEn = `[GENERAL AI BUILDER INSTRUCTION]\nGenerate a high-quality interactive single-file web application.`;
+                }
 
-            let lbInstruction = "";
-            if (selectedLeaderboardMode.includes("Online Google Sheets")) {
-                lbInstruction = `- SINKRONISASI GOOGLE SHEETS (REKAP NILAI GURU): Gunakan integrasi Google Apps Script Web App di dalam game. Sediakan form pengaturan (Settings) bagi guru untuk memasukkan "Google Apps Script Web App URL" milik spreadsheet mereka. Setiap kali siswa menyelesaikannya, data nama dan skor terkirim otomatis ke Google Sheet milik guru secara real-time.`;
-            } else {
-                lbInstruction = `- SINKRONISASI LEADERBOARD LOKAL: Gunakan LocalStorage browser untuk menyimpan skor pada perangkat yang sama.`;
+                let gameLangNoteEn = "";
+                if (selectedLanguage === "English") {
+                    gameLangNoteEn = `⚠️ MANDATORY IN-GAME LANGUAGE: The entire game interface, quiz questions, options, buttons, and instructions MUST BE WRITTEN IN ENGLISH.`;
+                } else if (selectedLanguage === "Bilingual (ID & EN)") {
+                    gameLangNoteEn = `⚠️ MANDATORY IN-GAME LANGUAGE: Use BILINGUAL (Bahasa Indonesia & English side-by-side, e.g., "Start Game / Mulai Game").`;
+                } else {
+                    gameLangNoteEn = `⚠️ MANDATORY IN-GAME LANGUAGE: The entire game interface and quiz questions MUST BE WRITTEN IN BAHASA INDONESIA.`;
+                }
+
+                let lbInstructionEn = selectedLeaderboardMode.includes("Online Google Sheets") 
+                    ? `- GOOGLE SHEETS SYNC (TEACHER GRADEBOOK): Integrate Google Apps Script Web App. Provide a Settings form for teachers to enter their "Google Apps Script Web App URL". Automatically submit student names and scores to teacher's Google Sheet in real-time upon completion.`
+                    : `- LOCAL LEADERBOARD SYNC: Use browser LocalStorage to store scores on the same device.`;
+
+                return `${aiPersonaHeaderEn}
+
+INTERACTIVE EDUCATIONAL GAME & QUIZ SPECIFICATIONS (${brand})
+Curriculum / Institution: ${selectedMinistry}
+Target AI Builder: ${targetAI}
+In-Game Target Language: ${selectedLanguage}
+
+${gameLangNoteEn}
+
+1. MAIN GAME SPECIFICATIONS
+- Game Mechanics: ${selectedGameTypes.join(", ")}
+- Subject / Topic (${selectedMinistry}): ${finalTopic}
+- Grade Level: ${gradeLevel}
+- Number of Questions / Challenges: ${qCount}
+
+2. START SCREEN & USER ONBOARDING
+- Landing/Start Screen: The game MUST feature a modern playful start screen (similar to Wayground / Quizizz / Kahoot).
+- Include a "Student Name" input field and a prominent "Start Game" button.
+- The entered student name must be recorded and used to greet the student and display scores on the class leaderboard.
+
+3. BACKGROUND THEME & VISUAL STYLE
+- Game Logo: Consistently use Edu-DoodlePrint default logo (1000538651.jpg) in the header.
+- Background Theme: ${finalBgTheme} (Must be animated / moving interactive elements)
+- Visual UI Style: ${selectedStyle}
+- Mandatory UI Design: Use 'Fredoka' font, cheerful pastel/bright colors, rounded-3xl corners, shadow effects, bouncy animated buttons (hover:scale-105 active:scale-95), and celebration particle effects upon correct answers.
+
+4. LEARNING OBJECTIVES & GAME FEATURES
+- Learning Objectives: ${selectedBloom.join(", ")}
+- Interactive Features: ${selectedFeatures.join(", ")}
+${lbInstructionEn}
+- Additional Notes: ${extraNote}
+
+5. MANDATORY GAMEPLAY & REPLAYABILITY REQUIREMENTS:
+- DYNAMIC BACKGROUND: The game background must feel alive (e.g., animated clouds, stars, or underwater fish matching "${finalBgTheme}").
+- "PLAY AGAIN" (NEW QUESTIONS): When clicking "Play Again", the system MUST shuffle and present a NEW SET of questions rather than repeating the same ones.
+- EVALUATION & LEADERBOARD: Provide score tracking, timers, celebratory feedback animations, and a class leaderboard connected to the database.
+
+DEVELOPMENT INSTRUCTION:
+Generate a complete, single-file standalone web application (HTML, CSS, JavaScript) ready to run directly in any web browser.`;
             }
 
-            // Penyesuaian Karakteristik Prompt Berdasarkan AI Builder yang Dipilih
-            let aiPersonaHeader = "";
+            // LOGIKA BAHASA OUTPUT PROMPT (POINT 5 = BAHASA INDONESIA)
+            let aiPersonaHeaderId = "";
             if (targetAI.includes("ChatGPT")) {
-                aiPersonaHeader = `[INSTRUKSI KHUSUS UNTUK CHATGPT]\nBertindaklah sebagai Senior Frontend Developer & Pakar Kurikulum Kurikulum ${selectedMinistry}. Buatkan struktur kodingan yang bersih, modular, kaya detail estetika, dan sangat responsif.`;
+                aiPersonaHeaderId = `[INSTRUKSI KHUSUS UNTUK CHATGPT]\nBertindaklah sebagai Senior Frontend Developer & Pakar Kurikulum ${selectedMinistry}. Tuliskan kode HTML, CSS, dan JS interaktif yang bersih, modular, kaya detail estetika, dan sangat responsif.`;
             } else if (targetAI.includes("Gemini")) {
-                aiPersonaHeader = `[INSTRUKSI KHUSUS UNTUK GEMINI / AI STUDIO]\nBertindaklah sebagai System Architect & Educational Game Developer. Pastikan kode HTML/CSS/JS lengkap, tidak terpotong (full code), akurat secara logika kuis Kurikulum ${selectedMinistry}, dan memiliki animasi interaktif yang memukau.`;
+                aiPersonaHeaderId = `[INSTRUKSI KHUSUS UNTUK GEMINI / AI STUDIO]\nBertindaklah sebagai System Architect & Educational Game Developer. Tuliskan kodingan lengkap dalam 1 file tunggal (HTML, CSS, JS), jangan ada yang dipotong. Sertakan CDN Tailwind CSS dan Google Fonts Fredoka secara wajib.`;
             } else if (targetAI.includes("Claude")) {
-                aiPersonaHeader = `[INSTRUKSI KHUSUS UNTUK CLAUDE]\nBertindaklah sebagai Expert Software Engineer. Tuliskan kode clean-code berstandar tinggi dengan komentar kode yang terstruktur elegan dan pengalaman UI/UX tingkat tinggi untuk anak-anak.`;
+                aiPersonaHeaderId = `[INSTRUKSI KHUSUS UNTUK CLAUDE]\nBertindaklah sebagai Expert Software Engineer. Tuliskan kode clean-code berstandar tinggi dengan komentar terstruktur dan UI/UX interaktif tingkat tinggi.`;
             } else {
-                aiPersonaHeader = `[INSTRUKSI UMUM BUILDER]\nBuatkan aplikasi web interaktif tunggal (Single File App) berkualitas tinggi.`;
+                aiPersonaHeaderId = `[INSTRUKSI UMUM BUILDER]\nBuatkan aplikasi web interaktif tunggal (Single File Standalone Web App) berkualitas tinggi.`;
             }
 
-            return `${aiPersonaHeader}
+            let gameLangNoteId = "";
+            if (selectedLanguage === "English") {
+                gameLangNoteId = `⚠️ BAHASA PENGANTAR GAME WAJIB: Seluruh antarmuka game, teks soal kuis, pilihan jawaban, tombol, dan petunjuk WAJIB MENGGUNAKAN BAHASA INGGRIS (FULL ENGLISH).`;
+            } else if (selectedLanguage === "Bilingual (ID & EN)") {
+                gameLangNoteId = `⚠️ BAHASA PENGANTAR GAME WAJIB: Gunakan BILINGUAL (Bahasa Indonesia & Bahasa Inggris berdampingan, contoh: "Start Game / Mulai Game").`;
+            } else {
+                gameLangNoteId = `⚠️ BAHASA PENGANTAR GAME WAJIB: Seluruh antarmuka game, teks soal kuis, pilihan jawaban, tombol, dan petunjuk WAJIB MENGGUNAKAN BAHASA INDONESIA.`;
+            }
+
+            let lbInstructionId = selectedLeaderboardMode.includes("Online Google Sheets") 
+                ? `- SINKRONISASI GOOGLE SHEETS (REKAP NILAI GURU): Gunakan integrasi Google Apps Script Web App di dalam game. Sediakan form pengaturan (Settings) bagi guru untuk memasukkan "Google Apps Script Web App URL" milik spreadsheet mereka. Setiap kali siswa menyelesaikannya, data nama dan skor terkirim otomatis ke Google Sheet milik guru secara real-time.`
+                : `- SINKRONISASI LEADERBOARD LOKAL: Gunakan LocalStorage browser untuk menyimpan skor pada perangkat yang sama.`;
+
+            return `${aiPersonaHeaderId}
 
 SPESIFIKASI GAME & KUIS EDUKASI INTERAKTIF (${brand})
 Kurikulum / Instansi: ${selectedMinistry}
 Target AI Builder: ${targetAI}
 Bahasa Pengantar Game: ${selectedLanguage}
+
+${gameLangNoteId}
 
 1. SPESIFIKASI UTAMA PERMAINAN
 - Jenis Game: ${selectedGameTypes.join(", ")}
@@ -761,7 +831,7 @@ Bahasa Pengantar Game: ${selectedLanguage}
 - Nama siswa yang diinput wajib dicatat dan digunakan untuk menyapa siswa serta menampilkan skor pada papan peringkat/leaderboard.
 
 3. TEMA BACKGROUND & VISUAL INTERAKTIF
-- Logo Game: ${logoInstruction}
+- Logo Game: Gunakan logo default Edu-DoodlePrint (1000538651.jpg) di bagian header game secara konsisten.
 - Tema Background Game: ${finalBgTheme} (Wajib Dibuat Animatif / Interaktif Bergerak)
 - Gaya Visual UI: ${selectedStyle}
 - Desain UI Wajib: Gunakan font 'Fredoka', warna ceria pastel/bright, sudut rounded-3xl, efek bayangan, tombol animasi membal (hover:scale-105 active:scale-95), serta efek selebrasi jawaban benar.
@@ -769,7 +839,7 @@ Bahasa Pengantar Game: ${selectedLanguage}
 4. TUJUAN PEMBELAJARAN & FITUR ELEMEN
 - Tujuan Pembelajaran: ${selectedBloom.join(", ")}
 - Fitur Interaktif: ${selectedFeatures.join(", ")}
-${lbInstruction}
+${lbInstructionId}
 - Catatan Tambahan: ${extraNote}
 
 5. SYARAT WAJIB GAMEPLAY & KUALITAS REPLAYABILITY:
